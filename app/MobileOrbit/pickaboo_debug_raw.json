@@ -1,0 +1,2379 @@
+{
+    "category_id": 171,
+    "category_slug": "smartphone",
+    "category_name": "Smartphones",
+    "meta_title": "Shop the Best Quality Smartphones in Bangladesh | Pickaboo",
+    "meta_keywords": "mobile, phone, smartphone, Xiaomi, Redmi, Realme, Samsung, Apple, OPPO, Vivo, Oneplus, Infinix, Tecno, Nokia, Motorola, best camera phone, best performance phone, mobile phone price, 2GB phone, 16 gb phone, 8 gb phone, 4 gb phone, 5G, best gaming phone, best battery phone.",
+    "meta_description": "Explore a wide range of top-quality smartphones at Pickaboo. Discover the latest models from renowned brands. Find the perfect smartphone that matches your requirements.",
+    "image": "",
+    "mobile_image": "",
+    "banner": [
+        {
+            "slide_id": "258",
+            "slider_id": "16",
+            "store_id": "0",
+            "title": "top banner",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/1_Banner.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/1_Banner_App.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "171",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:01:17",
+            "updated_at": "2023-02-20 05:01:17",
+            "url_key": "smartphone",
+            "name": "Smartphones",
+            "alias": "Smartphones",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/1_Banner_App.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/1_Banner.jpg"
+        },
+        {
+            "slide_id": "382",
+            "slider_id": "16",
+            "store_id": "0",
+            "title": "2nd",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/Pickaboo_Your_Smartphone_Destination.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/Pickaboo_Your_Smartphone_Destination_1.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "3374",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:01:17",
+            "updated_at": "2023-02-20 05:01:17",
+            "url_key": "mobile-deals",
+            "name": "Smartphones",
+            "alias": "Smartphones",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Pickaboo_Your_Smartphone_Destination_1.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Pickaboo_Your_Smartphone_Destination.jpg"
+        },
+        {
+            "slide_id": "383",
+            "slider_id": "16",
+            "store_id": "0",
+            "title": "3rd 2",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/OnePlus_Nord_4_Website.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/OnePlus_Nord_4_App.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "3428",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:01:17",
+            "updated_at": "2023-02-20 05:01:17",
+            "url_key": "oneplus-nord-4-5g-g",
+            "name": "Smartphones",
+            "alias": "Smartphones",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/OnePlus_Nord_4_App.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/OnePlus_Nord_4_Website.jpg"
+        },
+        {
+            "slide_id": "384",
+            "slider_id": "16",
+            "store_id": "0",
+            "title": "4th 2",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/realme_C75_Website.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/realme_C75_App_Banner.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "106773",
+            "linktype": "product",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:01:17",
+            "updated_at": "2023-02-20 05:01:17",
+            "url_key": "realme-c75-8gb-128gb",
+            "name": "Smartphones",
+            "alias": "Smartphones",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/realme_C75_App_Banner.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/realme_C75_Website.jpg"
+        }
+    ],
+    "filter_data": [
+        {
+            "slide_id": "259",
+            "slider_id": "17",
+            "store_id": "0",
+            "title": "Camera Phone",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/Camera_Phone_2.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/Camera_Phone_3.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "3179",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:06:48",
+            "updated_at": "2023-02-20 05:06:48",
+            "url_key": "camera-phone",
+            "name": "Smartphones_filter",
+            "alias": "Smartphones_filter",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Camera_Phone_3.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Camera_Phone_2.jpg"
+        },
+        {
+            "slide_id": "260",
+            "slider_id": "17",
+            "store_id": "0",
+            "title": "Performance Phone",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/Performance_Phone.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/Performance_Phone_1.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "3180",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:06:48",
+            "updated_at": "2023-02-20 05:06:48",
+            "url_key": "performance-phone",
+            "name": "Smartphones_filter",
+            "alias": "Smartphones_filter",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Performance_Phone_1.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/Performance_Phone.jpg"
+        },
+        {
+            "slide_id": "261",
+            "slider_id": "17",
+            "store_id": "0",
+            "title": "Gaming Phone",
+            "mobile_slug": "",
+            "target_url": null,
+            "link_title_color": null,
+            "background_color": null,
+            "is_special_cat": "0",
+            "subtitle": null,
+            "content": null,
+            "content_colour": null,
+            "image": "dcastalia_hybridslider/image/gaming_phone.jpg",
+            "mobile_image": "media/dcastalia_hybridslider/image/gaming_phone_1.jpg",
+            "image_position": "full",
+            "background_colour": null,
+            "link": "3181",
+            "linktype": "category",
+            "order": "0",
+            "pagination_content": null,
+            "active_from": null,
+            "active_to": null,
+            "status": "1",
+            "created_at": "2023-02-20 05:06:48",
+            "updated_at": "2023-02-20 05:06:48",
+            "url_key": "gaming-phone",
+            "name": "Smartphones_filter",
+            "alias": "Smartphones_filter",
+            "tagrget-url": null,
+            "category_sort_data": null,
+            "is_category_status": null,
+            "delay": "3000",
+            "autoplay": "1",
+            "transition": "slide",
+            "pagination": "1",
+            "arrows": "1",
+            "retina_image_size": "1920",
+            "retina_mobile_image_size": "768",
+            "mobile_image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/gaming_phone_1.jpg",
+            "image_url": "https://storage.googleapis.com/pickaboo-prod/media/dcastalia_hybridslider/image/gaming_phone.jpg"
+        }
+    ],
+    "featured_category": [],
+    "featured_product_total": 0,
+    "featured_products": [],
+    "total_cat_prods": 160,
+    "cat_prods": [
+        {
+            "id": "113278",
+            "express_delivery": "1",
+            "product_name": "TECNO Spark 40 5G 4GB/128GB",
+            "sku": "TS405G4GB128GB",
+            "slug": "tecno-spark-40-5g-4gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 16999,
+            "product_specialPrice": 16699,
+            "product_discount": 2,
+            "offers": "113278",
+            "club_point": 298.8,
+            "rating": 4.3,
+            "rating_count": 4,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/t/e/tecno-spark-40-5g-4gb-23-11-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "112999",
+            "express_delivery": "1",
+            "product_name": "TECNO POVA Slim 5G 8GB/256GB",
+            "sku": "TPS5G8GB256GB",
+            "slug": "tecno-pova-slim-5g-8gb-256gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 29999,
+            "product_specialPrice": 28999,
+            "product_discount": 3,
+            "offers": "112999",
+            "club_point": 520.2,
+            "rating": 5,
+            "rating_count": 1,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/t/e/tecno-pova-slim-5g-8gb-23-11-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "112024",
+            "express_delivery": "1",
+            "product_name": "XTRA R24",
+            "sku": "XTRAR24",
+            "slug": "xtra-r24",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 2499,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "112024",
+            "club_point": 43.2,
+            "rating": 4.9,
+            "rating_count": 2,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/r/2/r24-black-4-8-25.jpg",
+            "emi_available": false,
+            "bottom_note": null
+        },
+        {
+            "id": "111651",
+            "express_delivery": "1",
+            "product_name": "TECNO Spark 40C 4GB/128GB",
+            "sku": "TS40C4GB128GB",
+            "slug": "tecno-spark-40c-4gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 12499,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "111651",
+            "club_point": 223.2,
+            "rating": 4.7,
+            "rating_count": 22,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/t/e/tecno-spark-40c-4gb-23-11-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "111365",
+            "express_delivery": "1",
+            "product_name": "TECNO Spark 40 6GB/128GB",
+            "sku": "TS406GB128GB",
+            "slug": "tecno-spark-40-6gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 13999,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "111365",
+            "club_point": 250.2,
+            "rating": 4.8,
+            "rating_count": 37,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/t/e/tecno-spark-40-6gb-23-11-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "111195",
+            "express_delivery": "1",
+            "product_name": "itel A90 4GB/128GB",
+            "sku": "IA904GB128GB",
+            "slug": "itel-a90-4gb-128gb",
+            "type_id": "configurable",
+            "stock_available": false,
+            "product_price": 0,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "111195",
+            "club_point": 0,
+            "rating": 5,
+            "rating_count": 4,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/i/t/itel-a90-4gb-11-23-25-1.jpg",
+            "emi_available": false,
+            "bottom_note": null
+        },
+        {
+            "id": "111075",
+            "express_delivery": "1",
+            "product_name": "Redmi Note 14 Pro 12GB/512GB",
+            "sku": "RN14P12GB512GB",
+            "slug": "redmi-note-14-pro-12gb-512gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 31999,
+            "product_specialPrice": 31299,
+            "product_discount": 2,
+            "offers": "111075",
+            "club_point": 561.6,
+            "rating": 4.7,
+            "rating_count": 15,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/r/e/redmi-note-14-pro-12gb-11-23-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "110813",
+            "express_delivery": "1",
+            "product_name": "TECNO Spark Go 2 3GB/64GB",
+            "sku": "TSG23GB64GB",
+            "slug": "tecno-spark-go-2-3gb-64gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 9999,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "110813",
+            "club_point": 178.2,
+            "rating": 4.6,
+            "rating_count": 7,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/t/e/tecno-spark-go-2-3gb-23-11-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "110290",
+            "express_delivery": "1",
+            "product_name": "realme C71 4GB/128GB",
+            "sku": "RC714GB128GB",
+            "slug": "realme-c71-4gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 14999,
+            "product_specialPrice": 14549,
+            "product_discount": 3,
+            "offers": "110290",
+            "club_point": 261,
+            "rating": 4.7,
+            "rating_count": 10,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/c/7/c71-4gb-128gb-2-12-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "105565",
+            "express_delivery": "1",
+            "product_name": "Symphony EVO 10",
+            "sku": "SEVO10",
+            "slug": "symphony-evo-10",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 2250,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "105565",
+            "club_point": 39.6,
+            "rating": 5,
+            "rating_count": 1,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/e/v/evo-10-black-7-10-24.jpg",
+            "emi_available": false,
+            "bottom_note": null
+        },
+        {
+            "id": "105423",
+            "express_delivery": "1",
+            "product_name": "realme 12 8GB/256GB ",
+            "sku": "R128GB256GB",
+            "slug": "realme-12-8gb-256gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 24999,
+            "product_specialPrice": 23799,
+            "product_discount": 5,
+            "offers": "105423",
+            "club_point": 426.6,
+            "rating": 5,
+            "rating_count": 12,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/r/e/realme-12-8gb-256gb-2-12-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114509",
+            "express_delivery": "0",
+            "product_name": "Google Pixel 10 Pro 5G 16GB/128GB",
+            "sku": "GP10PRO16GB128GB",
+            "slug": "google-pixel-10-pro-5g-16gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 139999,
+            "product_specialPrice": 134999,
+            "product_discount": 4,
+            "offers": "114509",
+            "club_point": 2428.2,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/p/i/pixel-10-pro-obsidian-28-9-25_2.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114459",
+            "express_delivery": "0",
+            "product_name": "Glimmer 1200mAh Rechargeable LED Flashlight",
+            "sku": "G1200MLFGLM",
+            "slug": "glimmer-1200mah-rechargeable-led-flashlight",
+            "type_id": "simple",
+            "stock_available": true,
+            "product_price": 2300,
+            "product_specialPrice": 1649,
+            "product_discount": 28,
+            "offers": "114459",
+            "club_point": 28.8,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/g/l/glimmer-800lm----13-12-25-1.jpg",
+            "emi_available": false,
+            "bottom_note": null
+        },
+        {
+            "id": "114430",
+            "express_delivery": "0",
+            "product_name": "OPPO A6x 6GB/128GB",
+            "sku": "OPPOA6X6GB128GB",
+            "slug": "oppo-a6x-6gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 18990,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "114430",
+            "club_point": 340.2,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/o/p/oppo-a6x-4gb-128gb-12-134-25-1_1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114423",
+            "express_delivery": "0",
+            "product_name": "OPPO A6x 4GB/128GB",
+            "sku": "OPPOA6X4GB128GB",
+            "slug": "oppo-a6x-4gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 16990,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "114423",
+            "club_point": 304.2,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/o/p/oppo-a6x-4gb-128gb-12-134-25-4.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114373",
+            "express_delivery": "0",
+            "product_name": "realme C85 8GB/128GB",
+            "sku": "RC858GB128GB",
+            "slug": "realme-c85-8gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 20999,
+            "product_specialPrice": 20199,
+            "product_discount": 4,
+            "offers": "114373",
+            "club_point": 361.8,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/r/e/realme-c85-8gb-128-12-9-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114369",
+            "express_delivery": "0",
+            "product_name": "realme C85 6GB/128GB",
+            "sku": "RC856GB128GB",
+            "slug": "realme-c85-6gb-128gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 18999,
+            "product_specialPrice": 18299,
+            "product_discount": 4,
+            "offers": "114369",
+            "club_point": 327.6,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/r/e/realme-c85-6gb-12-9-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114327",
+            "express_delivery": "0",
+            "product_name": "Nokia 108 ",
+            "sku": "NK108",
+            "slug": "nokia-108",
+            "type_id": "configurable",
+            "stock_available": false,
+            "product_price": 0,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "114327",
+            "club_point": 0,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/n/o/nokia-108-black-30-11-25.jpg-base-image.jpg",
+            "emi_available": false,
+            "bottom_note": null
+        },
+        {
+            "id": "114218",
+            "express_delivery": "0",
+            "product_name": "OPPO A6x 4GB/64GB",
+            "sku": "OPPOA6X4GB64GB",
+            "slug": "oppo-a6x-4gb-64gb",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 13990,
+            "product_specialPrice": 0,
+            "product_discount": 0,
+            "offers": "114218",
+            "club_point": 250.2,
+            "rating": 5,
+            "rating_count": 1,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/o/p/oppo-a6x-4gb-64gb-1-12-25.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        },
+        {
+            "id": "114037",
+            "express_delivery": "0",
+            "product_name": "Black Shark Pad 7 6GB/128GB (Wi-Fi) ",
+            "sku": "BSP76GB128GBWF",
+            "slug": "black-shark-pad-7-6gb-128gb-wi-fi",
+            "type_id": "configurable",
+            "stock_available": true,
+            "product_price": 19999,
+            "product_specialPrice": 18399,
+            "product_discount": 8,
+            "offers": "114037",
+            "club_point": 329.4,
+            "rating": null,
+            "rating_count": null,
+            "product_img": "https://storage.googleapis.com/pickaboo-prod/media/catalog/product/cache/948612736c72ae3709677d5981c43a49/b/l/black-shark-pad-7-6gb-128gb-_wifi_-12-10-25-1.jpg",
+            "emi_available": true,
+            "bottom_note": null
+        }
+    ],
+    "brands": [
+        {
+            "id": "172",
+            "name": "Samsung",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Samsung.jpg"
+        },
+        {
+            "id": "173",
+            "name": "iPhone",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Apple.jpg"
+        },
+        {
+            "id": "183",
+            "name": "OPPO",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/OPPO.jpg"
+        },
+        {
+            "id": "185",
+            "name": "Nokia",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Nokia.jpg"
+        },
+        {
+            "id": "187",
+            "name": "OnePlus",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/OnePlus.jpg"
+        },
+        {
+            "id": "239",
+            "name": "Xiaomi",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Xiaomi.jpg"
+        },
+        {
+            "id": "441",
+            "name": "Infinix",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Infinix.jpg"
+        },
+        {
+            "id": "1635",
+            "name": "TECNO",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Tecno.jpg"
+        },
+        {
+            "id": "1636",
+            "name": "vivo",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/vivo.jpg"
+        },
+        {
+            "id": "1833",
+            "name": "realme",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/realme.jpg"
+        },
+        {
+            "id": "2927",
+            "name": "Nothing",
+            "is_special": "0",
+            "icon": "https://storage.googleapis.com/pickaboo-prod/media/catalog/category/Nothing-Black.png"
+        }
+    ],
+    "sort_data": [
+        {
+            "title": "Newest First",
+            "value": "newest"
+        },
+        {
+            "title": "Oldest First",
+            "value": "oldest"
+        },
+        {
+            "title": "Name A to Z",
+            "value": "a2z"
+        },
+        {
+            "title": "Name Z to A",
+            "value": "z2a"
+        },
+        {
+            "title": "Price High to Low",
+            "value": "highest"
+        },
+        {
+            "title": "Price Low to High",
+            "value": "lowest"
+        },
+        {
+            "title": "Position",
+            "value": "position"
+        },
+        {
+            "title": "Express Delivery",
+            "value": "express_delivery"
+        }
+    ],
+    "filterable_attributes": [
+        {
+            "filter_name": "Category",
+            "filter_code": "cat",
+            "items": [
+                {
+                    "label": "5G Smartphone",
+                    "value": "3757",
+                    "count": "38"
+                },
+                {
+                    "label": "OnePlus",
+                    "value": "187",
+                    "count": "3"
+                },
+                {
+                    "label": "realme",
+                    "value": "1833",
+                    "count": "17"
+                },
+                {
+                    "label": "Xiaomi",
+                    "value": "239",
+                    "count": "10"
+                },
+                {
+                    "label": "Samsung",
+                    "value": "172",
+                    "count": "12"
+                },
+                {
+                    "label": "Symphony",
+                    "value": "174",
+                    "count": "8"
+                },
+                {
+                    "label": "Infinix",
+                    "value": "441",
+                    "count": "14"
+                },
+                {
+                    "label": "TECNO",
+                    "value": "1635",
+                    "count": "13"
+                },
+                {
+                    "label": "Honor",
+                    "value": "1227",
+                    "count": "7"
+                },
+                {
+                    "label": "Google",
+                    "value": "337",
+                    "count": "5"
+                },
+                {
+                    "label": "iPhone",
+                    "value": "173",
+                    "count": "15"
+                },
+                {
+                    "label": "vivo",
+                    "value": "1636",
+                    "count": "12"
+                },
+                {
+                    "label": "OPPO",
+                    "value": "183",
+                    "count": "11"
+                },
+                {
+                    "label": "itel",
+                    "value": "3173",
+                    "count": "14"
+                },
+                {
+                    "label": "ZTE",
+                    "value": "3369",
+                    "count": "1"
+                },
+                {
+                    "label": "Nokia",
+                    "value": "185",
+                    "count": "7"
+                },
+                {
+                    "label": "Nubia",
+                    "value": "536",
+                    "count": "4"
+                },
+                {
+                    "label": "UMIDIGI",
+                    "value": "1425",
+                    "count": "4"
+                },
+                {
+                    "label": "Victory Day Sale-এ অফিসিয়াল স্মার্টফোন কিনুন হাইয়েস্ট ডিসকাউন্টে!",
+                    "value": "2708",
+                    "count": "10"
+                },
+                {
+                    "label": "Top Selling Models",
+                    "value": "3177",
+                    "count": "1"
+                },
+                {
+                    "label": "Camera Phone",
+                    "value": "3179",
+                    "count": "16"
+                },
+                {
+                    "label": "Performance Phone",
+                    "value": "3180",
+                    "count": "23"
+                },
+                {
+                    "label": "Gaming Phone",
+                    "value": "3181",
+                    "count": "19"
+                },
+                {
+                    "label": "New arrival",
+                    "value": "3183",
+                    "count": "8"
+                }
+            ]
+        },
+        {
+            "filter_name": "Price",
+            "filter_code": "price",
+            "items": [
+                {
+                    "label": "৳0.00 - ৳9,999.99",
+                    "value": "-10000",
+                    "count": "44"
+                },
+                {
+                    "label": "৳10,000.00 - ৳19,999.99",
+                    "value": "10000-20000",
+                    "count": "46"
+                },
+                {
+                    "label": "৳20,000.00 - ৳29,999.99",
+                    "value": "20000-30000",
+                    "count": "25"
+                },
+                {
+                    "label": "৳30,000.00 - ৳39,999.99",
+                    "value": "30000-40000",
+                    "count": "17"
+                },
+                {
+                    "label": "৳40,000.00 - ৳49,999.99",
+                    "value": "40000-50000",
+                    "count": "5"
+                },
+                {
+                    "label": "৳50,000.00 - ৳59,999.99",
+                    "value": "50000-60000",
+                    "count": "4"
+                },
+                {
+                    "label": "৳60,000.00 - ৳69,999.99",
+                    "value": "60000-70000",
+                    "count": "2"
+                },
+                {
+                    "label": "৳70,000.00 and above",
+                    "value": "70000-",
+                    "count": 17
+                }
+            ]
+        },
+        {
+            "filter_name": "Brand",
+            "filter_code": "manufacturer",
+            "items": [
+                {
+                    "label": "Apple",
+                    "value": "607",
+                    "count": "15"
+                },
+                {
+                    "label": "Google",
+                    "value": "989",
+                    "count": "5"
+                },
+                {
+                    "label": "Honor",
+                    "value": "6759",
+                    "count": "7"
+                },
+                {
+                    "label": "Infinix",
+                    "value": "1070",
+                    "count": "14"
+                },
+                {
+                    "label": "Nokia",
+                    "value": "629",
+                    "count": "4"
+                },
+                {
+                    "label": "OnePlus",
+                    "value": "632",
+                    "count": "4"
+                },
+                {
+                    "label": "Oppo",
+                    "value": "633",
+                    "count": "11"
+                },
+                {
+                    "label": "Realme",
+                    "value": "9978",
+                    "count": "17"
+                },
+                {
+                    "label": "Samsung",
+                    "value": "642",
+                    "count": "12"
+                },
+                {
+                    "label": "Symphony",
+                    "value": "650",
+                    "count": "8"
+                },
+                {
+                    "label": "TECNO",
+                    "value": "924",
+                    "count": "13"
+                },
+                {
+                    "label": "UMIDIGI",
+                    "value": "8282",
+                    "count": "4"
+                },
+                {
+                    "label": "vivo",
+                    "value": "8958",
+                    "count": "12"
+                },
+                {
+                    "label": "Xiaomi",
+                    "value": "656",
+                    "count": "10"
+                },
+                {
+                    "label": "itel",
+                    "value": "10689",
+                    "count": "14"
+                },
+                {
+                    "label": "Black Shark",
+                    "value": "11967",
+                    "count": "1"
+                },
+                {
+                    "label": "Xtra",
+                    "value": "11971",
+                    "count": "3"
+                },
+                {
+                    "label": "ZTE",
+                    "value": "12243",
+                    "count": "5"
+                },
+                {
+                    "label": "Nubia",
+                    "value": "12244",
+                    "count": "4"
+                },
+                {
+                    "label": "Glimmer",
+                    "value": "12635",
+                    "count": "1"
+                }
+            ]
+        },
+        {
+            "filter_name": "Display Size (Inches)",
+            "filter_code": "display_phone_size",
+            "items": [
+                {
+                    "label": "11",
+                    "value": "988",
+                    "count": "2"
+                },
+                {
+                    "label": "2.00",
+                    "value": "707",
+                    "count": "1"
+                },
+                {
+                    "label": "2.4",
+                    "value": "731",
+                    "count": "5"
+                },
+                {
+                    "label": "6.1",
+                    "value": "5820",
+                    "count": "3"
+                },
+                {
+                    "label": "6.3",
+                    "value": "8083",
+                    "count": "8"
+                },
+                {
+                    "label": "6.5",
+                    "value": "8780",
+                    "count": "2"
+                },
+                {
+                    "label": "6.55",
+                    "value": "10347",
+                    "count": "1"
+                },
+                {
+                    "label": "6.6",
+                    "value": "10095",
+                    "count": "3"
+                },
+                {
+                    "label": "6.7",
+                    "value": "10074",
+                    "count": "27"
+                },
+                {
+                    "label": "6.8",
+                    "value": "10167",
+                    "count": "6"
+                },
+                {
+                    "label": "6.9",
+                    "value": "10313",
+                    "count": "7"
+                },
+                {
+                    "label": "6.52",
+                    "value": "10625",
+                    "count": "1"
+                },
+                {
+                    "label": "6.56",
+                    "value": "10697",
+                    "count": "2"
+                },
+                {
+                    "label": "6.78",
+                    "value": "10591",
+                    "count": "18"
+                },
+                {
+                    "label": "6.67",
+                    "value": "11009",
+                    "count": "25"
+                },
+                {
+                    "label": "6.74",
+                    "value": "11628",
+                    "count": "6"
+                },
+                {
+                    "label": "6.75",
+                    "value": "11737",
+                    "count": "14"
+                },
+                {
+                    "label": "6.67\" AMOLED 120hz",
+                    "value": "12016",
+                    "count": "1"
+                },
+                {
+                    "label": "6.68-inch 90Hz LCD",
+                    "value": "12155",
+                    "count": "3"
+                }
+            ]
+        },
+        {
+            "filter_name": "RAM(GB)",
+            "filter_code": "ram",
+            "items": [
+                {
+                    "label": "12",
+                    "value": "10082",
+                    "count": "19"
+                },
+                {
+                    "label": "16",
+                    "value": "753",
+                    "count": "1"
+                },
+                {
+                    "label": "2",
+                    "value": "689",
+                    "count": "3"
+                },
+                {
+                    "label": "3",
+                    "value": "687",
+                    "count": "4"
+                },
+                {
+                    "label": "4GB",
+                    "value": "686",
+                    "count": "26"
+                },
+                {
+                    "label": "6",
+                    "value": "890",
+                    "count": "26"
+                },
+                {
+                    "label": "64",
+                    "value": "1019",
+                    "count": "1"
+                },
+                {
+                    "label": "8",
+                    "value": "713",
+                    "count": "58"
+                },
+                {
+                    "label": "8GB LPDDR4X",
+                    "value": "11974",
+                    "count": "1"
+                }
+            ]
+        },
+        {
+            "filter_name": "Processor",
+            "filter_code": "processor",
+            "items": [
+                {
+                    "label": "Octa Core",
+                    "value": "694",
+                    "count": "65"
+                },
+                {
+                    "label": "A15 Bionic chip",
+                    "value": "10919",
+                    "count": "1"
+                },
+                {
+                    "label": "Qualcomm Snapdragon™ 695",
+                    "value": "11165",
+                    "count": "1"
+                },
+                {
+                    "label": "Snapdragon® 685 (6nm)",
+                    "value": "11607",
+                    "count": "2"
+                },
+                {
+                    "label": "Unisoc SC9863A1",
+                    "value": "11661",
+                    "count": "1"
+                },
+                {
+                    "label": "A16 Bionic Chip",
+                    "value": "11760",
+                    "count": "1"
+                },
+                {
+                    "label": "A17 Pro Chip",
+                    "value": "11775",
+                    "count": "3"
+                },
+                {
+                    "label": "Qualcomm Snapdragon® 7 Gen 3 (4nm)",
+                    "value": "11972",
+                    "count": "1"
+                }
+            ]
+        },
+        {
+            "filter_name": "5G",
+            "filter_code": "attr_5g_smartphone",
+            "items": [
+                {
+                    "label": "Yes",
+                    "value": 1,
+                    "count": "38"
+                },
+                {
+                    "label": "No",
+                    "value": 0,
+                    "count": "145"
+                }
+            ]
+        },
+        {
+            "filter_name": "Express Delivery",
+            "filter_code": "express_delivery",
+            "items": [
+                {
+                    "label": "Yes",
+                    "value": 1,
+                    "count": "12"
+                }
+            ]
+        },
+        {
+            "filter_name": "Color",
+            "filter_code": "color",
+            "items": [
+                {
+                    "label": "Aurora Blue",
+                    "value": "10046",
+                    "count": "3"
+                },
+                {
+                    "label": "Aurora Green",
+                    "value": "10045",
+                    "count": "1"
+                },
+                {
+                    "label": "Aurora Purple",
+                    "value": "8756",
+                    "count": "2"
+                },
+                {
+                    "label": "Black",
+                    "value": "659",
+                    "count": "25"
+                },
+                {
+                    "label": "Blue",
+                    "value": "662",
+                    "count": "14"
+                },
+                {
+                    "label": "Bronze",
+                    "value": "8208",
+                    "count": "1"
+                },
+                {
+                    "label": "Brown",
+                    "value": "664",
+                    "count": "2"
+                },
+                {
+                    "label": "Champagne gold",
+                    "value": "1037",
+                    "count": "1"
+                },
+                {
+                    "label": "Charcoal",
+                    "value": "665",
+                    "count": "1"
+                },
+                {
+                    "label": "Charcoal Black",
+                    "value": "1104",
+                    "count": "1"
+                },
+                {
+                    "label": "Cosmic Green",
+                    "value": "10144",
+                    "count": "2"
+                },
+                {
+                    "label": "Deep Blue",
+                    "value": "5884",
+                    "count": "4"
+                },
+                {
+                    "label": "Emerald Green",
+                    "value": "10109",
+                    "count": "2"
+                },
+                {
+                    "label": "Galaxy Blue",
+                    "value": "7958",
+                    "count": "3"
+                },
+                {
+                    "label": "Glacier White",
+                    "value": "1135",
+                    "count": "2"
+                },
+                {
+                    "label": "Gold",
+                    "value": "666",
+                    "count": "4"
+                },
+                {
+                    "label": "Green",
+                    "value": "667",
+                    "count": "9"
+                },
+                {
+                    "label": "Grey",
+                    "value": "668",
+                    "count": "6"
+                },
+                {
+                    "label": "Jet black",
+                    "value": "969",
+                    "count": "1"
+                },
+                {
+                    "label": "Lavender",
+                    "value": "5152",
+                    "count": "2"
+                },
+                {
+                    "label": "Light Blue ",
+                    "value": "868",
+                    "count": "3"
+                },
+                {
+                    "label": "Light Green",
+                    "value": "8502",
+                    "count": "2"
+                },
+                {
+                    "label": "Light purple",
+                    "value": "6496",
+                    "count": "1"
+                },
+                {
+                    "label": "Metallic Black",
+                    "value": "5501",
+                    "count": "1"
+                },
+                {
+                    "label": "Midnight Black",
+                    "value": "1194",
+                    "count": "15"
+                },
+                {
+                    "label": "Midnight Blue",
+                    "value": "5549",
+                    "count": "1"
+                },
+                {
+                    "label": "Mint",
+                    "value": "7496",
+                    "count": "3"
+                },
+                {
+                    "label": "Navy Blue",
+                    "value": "5190",
+                    "count": "4"
+                },
+                {
+                    "label": "Ocean Blue",
+                    "value": "6038",
+                    "count": "6"
+                },
+                {
+                    "label": "Olive Green",
+                    "value": "5142",
+                    "count": "2"
+                },
+                {
+                    "label": "Pink",
+                    "value": "676",
+                    "count": "2"
+                },
+                {
+                    "label": "Purple",
+                    "value": "677",
+                    "count": "1"
+                },
+                {
+                    "label": "Red",
+                    "value": "678",
+                    "count": "3"
+                },
+                {
+                    "label": "Ruby Red",
+                    "value": "5911",
+                    "count": "2"
+                },
+                {
+                    "label": "Sapphire Blue",
+                    "value": "8755",
+                    "count": "1"
+                },
+                {
+                    "label": "Silver",
+                    "value": "680",
+                    "count": "5"
+                },
+                {
+                    "label": "Sky Blue",
+                    "value": "681",
+                    "count": "3"
+                },
+                {
+                    "label": "Skyline Blue",
+                    "value": "10143",
+                    "count": "1"
+                },
+                {
+                    "label": "Space Black",
+                    "value": "8289",
+                    "count": "5"
+                },
+                {
+                    "label": "Teal",
+                    "value": "2525",
+                    "count": "1"
+                },
+                {
+                    "label": "White",
+                    "value": "683",
+                    "count": "8"
+                },
+                {
+                    "label": "Yellow",
+                    "value": "684",
+                    "count": "1"
+                },
+                {
+                    "label": "Iris Blue",
+                    "value": "10397",
+                    "count": "2"
+                },
+                {
+                    "label": "Mint Green",
+                    "value": "10445",
+                    "count": "5"
+                },
+                {
+                    "label": "Peacock Green",
+                    "value": "10449",
+                    "count": "3"
+                },
+                {
+                    "label": "Aqua Green",
+                    "value": "10458",
+                    "count": "1"
+                },
+                {
+                    "label": "Obsidian Black",
+                    "value": "10480",
+                    "count": "3"
+                },
+                {
+                    "label": "Lake Green",
+                    "value": "10481",
+                    "count": "3"
+                },
+                {
+                    "label": "Lime Green",
+                    "value": "10549",
+                    "count": "3"
+                },
+                {
+                    "label": "Pitch Black",
+                    "value": "10550",
+                    "count": "1"
+                },
+                {
+                    "label": "Celestial Black",
+                    "value": "10557",
+                    "count": "1"
+                },
+                {
+                    "label": "Cyber Blue",
+                    "value": "10739",
+                    "count": "1"
+                },
+                {
+                    "label": "Lake Blue",
+                    "value": "10748",
+                    "count": "2"
+                },
+                {
+                    "label": "Cloud White",
+                    "value": "10763",
+                    "count": "1"
+                },
+                {
+                    "label": "Awesome Black",
+                    "value": "10781",
+                    "count": "2"
+                },
+                {
+                    "label": "Light Violet",
+                    "value": "10854",
+                    "count": "2"
+                },
+                {
+                    "label": "Dynamic Gray",
+                    "value": "10861",
+                    "count": "1"
+                },
+                {
+                    "label": "Desert Gold",
+                    "value": "10877",
+                    "count": "3"
+                },
+                {
+                    "label": "Starlight",
+                    "value": "10924",
+                    "count": "1"
+                },
+                {
+                    "label": "Mist Blue",
+                    "value": "10958",
+                    "count": "2"
+                },
+                {
+                    "label": "Moonlight White",
+                    "value": "11021",
+                    "count": "2"
+                },
+                {
+                    "label": "Ice Blue",
+                    "value": "11030",
+                    "count": "6"
+                },
+                {
+                    "label": "Starry Purple",
+                    "value": "11098",
+                    "count": "1"
+                },
+                {
+                    "label": "Shadow Black",
+                    "value": "11127",
+                    "count": "2"
+                },
+                {
+                    "label": "Elegant Black",
+                    "value": "11150",
+                    "count": "1"
+                },
+                {
+                    "label": "Bamboo Green",
+                    "value": "11348",
+                    "count": "1"
+                },
+                {
+                    "label": "Jade Green",
+                    "value": "11381",
+                    "count": "4"
+                },
+                {
+                    "label": "Black Titanium",
+                    "value": "11432",
+                    "count": "6"
+                },
+                {
+                    "label": "Awesome Graphite",
+                    "value": "11514",
+                    "count": "2"
+                },
+                {
+                    "label": "Awesome Lime",
+                    "value": "11515",
+                    "count": "2"
+                },
+                {
+                    "label": "Starlit Black",
+                    "value": "11523",
+                    "count": "2"
+                },
+                {
+                    "label": "Frost Blue",
+                    "value": "11583",
+                    "count": "1"
+                },
+                {
+                    "label": "Dawn Blue",
+                    "value": "11663",
+                    "count": "1"
+                },
+                {
+                    "label": "Sapphire Black",
+                    "value": "11680",
+                    "count": "1"
+                },
+                {
+                    "label": "Lunar Grey",
+                    "value": "11697",
+                    "count": "1"
+                },
+                {
+                    "label": "Meadow Green",
+                    "value": "11698",
+                    "count": "2"
+                },
+                {
+                    "label": "Nebula Black",
+                    "value": "11699",
+                    "count": "2"
+                },
+                {
+                    "label": "Dew Green",
+                    "value": "11743",
+                    "count": "1"
+                },
+                {
+                    "label": "Titanium Silver",
+                    "value": "11749",
+                    "count": "9"
+                },
+                {
+                    "label": "Galaxy White",
+                    "value": "11758",
+                    "count": "3"
+                },
+                {
+                    "label": "White Titanium",
+                    "value": "11769",
+                    "count": "6"
+                },
+                {
+                    "label": "Blue Titanium",
+                    "value": "11770",
+                    "count": "3"
+                },
+                {
+                    "label": "Natural Titanium",
+                    "value": "11771",
+                    "count": "6"
+                },
+                {
+                    "label": "Light Gold",
+                    "value": "11798",
+                    "count": "1"
+                },
+                {
+                    "label": "Ink Black",
+                    "value": "11852",
+                    "count": "7"
+                },
+                {
+                    "label": "Caramel Gold",
+                    "value": "11879",
+                    "count": "1"
+                },
+                {
+                    "label": "Titanium Gray",
+                    "value": "11927",
+                    "count": "10"
+                },
+                {
+                    "label": "Autumn Green",
+                    "value": "11953",
+                    "count": "1"
+                },
+                {
+                    "label": "Flowing Silver",
+                    "value": "12013",
+                    "count": "2"
+                },
+                {
+                    "label": "Terracotta Red",
+                    "value": "12060",
+                    "count": "1"
+                },
+                {
+                    "label": "Radium Green",
+                    "value": "12118",
+                    "count": "2"
+                },
+                {
+                    "label": "Cosmic Gold",
+                    "value": "12119",
+                    "count": "3"
+                },
+                {
+                    "label": "Sandy Gold",
+                    "value": "12135",
+                    "count": "2"
+                },
+                {
+                    "label": "Twilight Gold",
+                    "value": "12144",
+                    "count": "1"
+                },
+                {
+                    "label": "Mega Blue",
+                    "value": "12150",
+                    "count": "1"
+                },
+                {
+                    "label": "Super Silver",
+                    "value": "12151",
+                    "count": "1"
+                },
+                {
+                    "label": "Amber Orange",
+                    "value": "12160",
+                    "count": "2"
+                },
+                {
+                    "label": "Ocean Cyan",
+                    "value": "12165",
+                    "count": "3"
+                },
+                {
+                    "label": "Matte Grey",
+                    "value": "12167",
+                    "count": "2"
+                },
+                {
+                    "label": "Divine Gold",
+                    "value": "12190",
+                    "count": "2"
+                },
+                {
+                    "label": "Oxy Black",
+                    "value": "12191",
+                    "count": "1"
+                },
+                {
+                    "label": "Marble Black",
+                    "value": "12207",
+                    "count": "1"
+                },
+                {
+                    "label": "Neo Titanium",
+                    "value": "12210",
+                    "count": "1"
+                },
+                {
+                    "label": "Sandstone Gold",
+                    "value": "12211",
+                    "count": "1"
+                },
+                {
+                    "label": "Sleek Black",
+                    "value": "12212",
+                    "count": "7"
+                },
+                {
+                    "label": "Desert Titanium",
+                    "value": "12214",
+                    "count": "3"
+                },
+                {
+                    "label": "Ultramarine",
+                    "value": "12215",
+                    "count": "1"
+                },
+                {
+                    "label": "Pioneer Green",
+                    "value": "12220",
+                    "count": "1"
+                },
+                {
+                    "label": "Sparkle Black",
+                    "value": "12223",
+                    "count": "1"
+                },
+                {
+                    "label": "Starlight White",
+                    "value": "12224",
+                    "count": "1"
+                },
+                {
+                    "label": "Air Force Blue",
+                    "value": "12229",
+                    "count": "1"
+                },
+                {
+                    "label": "Misty Aqua",
+                    "value": "12251",
+                    "count": "1"
+                },
+                {
+                    "label": "Wilderness Green",
+                    "value": "12304",
+                    "count": "1"
+                },
+                {
+                    "label": "Mist Purple",
+                    "value": "12307",
+                    "count": "2"
+                },
+                {
+                    "label": "Plume Purple​",
+                    "value": "12351",
+                    "count": "3"
+                },
+                {
+                    "label": "Obsidian",
+                    "value": "12376",
+                    "count": "5"
+                },
+                {
+                    "label": "Peony",
+                    "value": "12377",
+                    "count": "1"
+                },
+                {
+                    "label": "Porcelain",
+                    "value": "12378",
+                    "count": "4"
+                },
+                {
+                    "label": "Wintergreen",
+                    "value": "12379",
+                    "count": "1"
+                },
+                {
+                    "label": "Grunge Black",
+                    "value": "12386",
+                    "count": "1"
+                },
+                {
+                    "label": "Scuba Blue",
+                    "value": "12387",
+                    "count": "1"
+                },
+                {
+                    "label": "Silk Titanium",
+                    "value": "12388",
+                    "count": "2"
+                },
+                {
+                    "label": "Fossil Gray",
+                    "value": "12389",
+                    "count": "2"
+                },
+                {
+                    "label": "Supernova Blue",
+                    "value": "12390",
+                    "count": "1"
+                },
+                {
+                    "label": "Marine",
+                    "value": "12399",
+                    "count": "1"
+                },
+                {
+                    "label": "Snow",
+                    "value": "12402",
+                    "count": "1"
+                },
+                {
+                    "label": "Hazel",
+                    "value": "12403",
+                    "count": "1"
+                },
+                {
+                    "label": "Bay",
+                    "value": "12404",
+                    "count": "1"
+                },
+                {
+                    "label": "Galaxy Black",
+                    "value": "12407",
+                    "count": "5"
+                },
+                {
+                    "label": "Emerald Lake Green",
+                    "value": "12409",
+                    "count": "2"
+                },
+                {
+                    "label": "Coral Pink",
+                    "value": "12415",
+                    "count": "2"
+                },
+                {
+                    "label": "Oceanic Blue",
+                    "value": "12416",
+                    "count": "1"
+                },
+                {
+                    "label": "Mountain Shade",
+                    "value": "12420",
+                    "count": "1"
+                },
+                {
+                    "label": "Enchanted Purple",
+                    "value": "12421",
+                    "count": "2"
+                },
+                {
+                    "label": "Racing Edition",
+                    "value": "12422",
+                    "count": "2"
+                },
+                {
+                    "label": "Sand Gold",
+                    "value": "12431",
+                    "count": "4"
+                },
+                {
+                    "label": "Lightning Purple",
+                    "value": "12436",
+                    "count": "1"
+                },
+                {
+                    "label": "Mecha Silver",
+                    "value": "12437",
+                    "count": "1"
+                },
+                {
+                    "label": "Storm Titanium",
+                    "value": "12438",
+                    "count": "1"
+                },
+                {
+                    "label": "Galaxy Green",
+                    "value": "12440",
+                    "count": "1"
+                },
+                {
+                    "label": "Awesome Olive",
+                    "value": "12443",
+                    "count": "2"
+                },
+                {
+                    "label": "Awesome Lightgray",
+                    "value": "12444",
+                    "count": "2"
+                },
+                {
+                    "label": "Iris",
+                    "value": "12447",
+                    "count": "1"
+                },
+                {
+                    "label": "Awesome Lavender",
+                    "value": "12449",
+                    "count": "2"
+                },
+                {
+                    "label": "Forest Owl",
+                    "value": "12451",
+                    "count": "2"
+                },
+                {
+                    "label": "White Swan",
+                    "value": "12452",
+                    "count": "2"
+                },
+                {
+                    "label": "Stone Gray",
+                    "value": "12453",
+                    "count": "2"
+                },
+                {
+                    "label": "Citrus Orange",
+                    "value": "12454",
+                    "count": "2"
+                },
+                {
+                    "label": "Laser White",
+                    "value": "12457",
+                    "count": "1"
+                },
+                {
+                    "label": "Pure Titanium",
+                    "value": "12458",
+                    "count": "1"
+                },
+                {
+                    "label": "Fairy Purple",
+                    "value": "12459",
+                    "count": "1"
+                },
+                {
+                    "label": "Tidal Blue",
+                    "value": "12464",
+                    "count": "1"
+                },
+                {
+                    "label": "Shadow Blue",
+                    "value": "12478",
+                    "count": "2"
+                },
+                {
+                    "label": "Neon Red",
+                    "value": "12479",
+                    "count": "2"
+                },
+                {
+                    "label": "Soul Eye Purple",
+                    "value": "12480",
+                    "count": "2"
+                },
+                {
+                    "label": "Space Titanium",
+                    "value": "12482",
+                    "count": "2"
+                },
+                {
+                    "label": "Veil White",
+                    "value": "12483",
+                    "count": "5"
+                },
+                {
+                    "label": "Shadow Ash",
+                    "value": "12485",
+                    "count": "2"
+                },
+                {
+                    "label": "Blade White",
+                    "value": "12486",
+                    "count": "2"
+                },
+                {
+                    "label": "Dark Flare",
+                    "value": "12487",
+                    "count": "1"
+                },
+                {
+                    "label": "Turquoise Green",
+                    "value": "12488",
+                    "count": "3"
+                },
+                {
+                    "label": "Mirage Blue",
+                    "value": "12489",
+                    "count": "3"
+                },
+                {
+                    "label": "Grass Green",
+                    "value": "12490",
+                    "count": "2"
+                },
+                {
+                    "label": "Marble Sands",
+                    "value": "12492",
+                    "count": "1"
+                },
+                {
+                    "label": "Phantom Grey",
+                    "value": "12493",
+                    "count": "1"
+                },
+                {
+                    "label": "Black Infinity",
+                    "value": "12494",
+                    "count": "1"
+                },
+                {
+                    "label": "Marble Mist",
+                    "value": "12495",
+                    "count": "1"
+                },
+                {
+                    "label": "Moon Titanium",
+                    "value": "12496",
+                    "count": "2"
+                },
+                {
+                    "label": "Silvery Gray",
+                    "value": "12500",
+                    "count": "1"
+                },
+                {
+                    "label": "Ice Green",
+                    "value": "12501",
+                    "count": "1"
+                },
+                {
+                    "label": "Sandy Titanium",
+                    "value": "12507",
+                    "count": "1"
+                },
+                {
+                    "label": "Coral Tides",
+                    "value": "12508",
+                    "count": "3"
+                },
+                {
+                    "label": "Jungle Breath",
+                    "value": "12509",
+                    "count": "1"
+                },
+                {
+                    "label": "Orange Rose Valley",
+                    "value": "12510",
+                    "count": "1"
+                },
+                {
+                    "label": "Misty Violet",
+                    "value": "12511",
+                    "count": "2"
+                },
+                {
+                    "label": "Moco Cyber Green",
+                    "value": "12512",
+                    "count": "2"
+                },
+                {
+                    "label": "Sonic Yellow",
+                    "value": "12513",
+                    "count": "2"
+                },
+                {
+                    "label": "Aurora White",
+                    "value": "12514",
+                    "count": "1"
+                },
+                {
+                    "label": "Tundra Green",
+                    "value": "12515",
+                    "count": "1"
+                },
+                {
+                    "label": "Opal Blue",
+                    "value": "12518",
+                    "count": "1"
+                },
+                {
+                    "label": "Luminous Green",
+                    "value": "12519",
+                    "count": "1"
+                },
+                {
+                    "label": "Floating Gold",
+                    "value": "12546",
+                    "count": "1"
+                },
+                {
+                    "label": "Aero Blue",
+                    "value": "12548",
+                    "count": "1"
+                },
+                {
+                    "label": "Mist White",
+                    "value": "12558",
+                    "count": "1"
+                },
+                {
+                    "label": "Beach Gold",
+                    "value": "12559",
+                    "count": "2"
+                },
+                {
+                    "label": "Moonlight Blue",
+                    "value": "12565",
+                    "count": "2"
+                },
+                {
+                    "label": "Berry Purple",
+                    "value": "12567",
+                    "count": "1"
+                },
+                {
+                    "label": "Sapphire Black Blue",
+                    "value": "12570",
+                    "count": "2"
+                },
+                {
+                    "label": "Blush Pink Gold",
+                    "value": "12571",
+                    "count": "2"
+                },
+                {
+                    "label": "Gilded White",
+                    "value": "12572",
+                    "count": "2"
+                },
+                {
+                    "label": "Moonstone Silver",
+                    "value": "12573",
+                    "count": "2"
+                },
+                {
+                    "label": "Velvet Grey",
+                    "value": "12583",
+                    "count": "1"
+                },
+                {
+                    "label": "Marrs Green",
+                    "value": "12585",
+                    "count": "1"
+                },
+                {
+                    "label": "Moonstone",
+                    "value": "12586",
+                    "count": "1"
+                },
+                {
+                    "label": "Jade",
+                    "value": "12587",
+                    "count": "1"
+                },
+                {
+                    "label": "Pulse Green",
+                    "value": "12588",
+                    "count": "1"
+                },
+                {
+                    "label": "Slim White",
+                    "value": "12589",
+                    "count": "1"
+                },
+                {
+                    "label": "Cool Black",
+                    "value": "12590",
+                    "count": "1"
+                },
+                {
+                    "label": "Geek Black",
+                    "value": "12591",
+                    "count": "2"
+                },
+                {
+                    "label": "Neon Cyan",
+                    "value": "12592",
+                    "count": "2"
+                },
+                {
+                    "label": "Sandy Purple",
+                    "value": "12593",
+                    "count": "2"
+                },
+                {
+                    "label": "Titan Gray",
+                    "value": "12594",
+                    "count": "2"
+                },
+                {
+                    "label": "Stellar Blue",
+                    "value": "12595",
+                    "count": "2"
+                },
+                {
+                    "label": "Rosewood Red",
+                    "value": "12596",
+                    "count": "2"
+                },
+                {
+                    "label": "Velvet Black",
+                    "value": "12598",
+                    "count": "1"
+                },
+                {
+                    "label": "Sage",
+                    "value": "12601",
+                    "count": "2"
+                },
+                {
+                    "label": "Cosmic Orange",
+                    "value": "12602",
+                    "count": "3"
+                },
+                {
+                    "label": "Magic Silver",
+                    "value": "12604",
+                    "count": "1"
+                },
+                {
+                    "label": "Suit Titanium",
+                    "value": "12612",
+                    "count": "2"
+                },
+                {
+                    "label": "Silk Pink",
+                    "value": "12613",
+                    "count": "1"
+                },
+                {
+                    "label": "Velvet Green",
+                    "value": "12614",
+                    "count": "1"
+                },
+                {
+                    "label": "Parrot Purple",
+                    "value": "12623",
+                    "count": "3"
+                },
+                {
+                    "label": "Kingfisher Blue",
+                    "value": "12633",
+                    "count": "2"
+                },
+                {
+                    "label": "Swan Black",
+                    "value": "12634",
+                    "count": "2"
+                }
+            ]
+        }
+    ],
+    "category_discription": "<h1>Smartphone Price in Bangladesh (2025)</h1>\r\n<p>Looking for the best mobile phone deals in Bangladesh? Look no further! At Pickaboo, we bring you an exclusive collection of smartphones at the best prices. Whether you are searching for the latest models, budget-friendly options, featured phones or flagship devices, we've got you covered. Look through our extensive range of options, each tailored to suit your unique preferences. From sleek and stylish designs to high-performance devices, we have the right phone for every need.Our website showcases the latest mobile phone prices in BD, making it easy for you to upgrade your tech game. Whether you're a student, a professional, or a gaming enthusiast, our range has something for everyone.</p>\r\n<h2 style=\"font-size: 19px;\">Explore from the Best Mobile Phone Brands in Bangladesh</h2>\r\n<h3>iPhone:</h3>\r\n<p>Indulge in the epitome of luxury and cutting-edge technology with the iconic iPhone series, available at Pickaboo. From capturing breathtaking moments to staying connected with loved ones, iPhone ensures every task is accomplished effortlessly. Enjoy features like Night mode, ProRAW, and cinematic video recording to bring your artistic visions to life.Whether you're multitasking between apps, playing graphics-intensive games, or editing videos, your iPhone ensures a smooth and lag-free performance that keeps up with your demands.Explore the range of models, sizes, and colors to find the perfect fit from Pickaboo.</p>\r\n<h3>Samsung Phones:</h3>\r\n<p>At Pickaboo, we bring you the captivating world of Samsung phones. From the sleek design to the powerful processors, each aspect is meticulously designed to elevate your mobile experience to new heights. Samsung's advanced AMOLED technology ensures vibrant colors, deep contrasts, and impressive brightness, whether you're streaming your favorite show or capturing precious moments. Samsung phones are equipped with powerful processors that handle everything from demanding tasks to intensive gaming sessions with ease. Explore an array of Samsung phone models, each catering to different preferences and needs. From the flagship Galaxy S and Note series to the budget-friendly options, there's a Samsung phone for everyone.</p>\r\n<h3>Realme Phones:</h3>\r\n<p>Experience a world of seamless connectivity and lightning-fast data speeds with Realme phones. Realme phones come equipped with remarkable camera systems that empower you to capture life's moments in all their brilliance. From stunning landscapes to detailed portraits, these devices transform you into a skilled photographer. Realme offers a diverse range of phones to cater to every need and budget. Whether you're looking for flagship-level features or an affordable option without compromising on quality, there's a Realme phone waiting for you.</p>\r\n<h3>Xiaomi Phones:</h3>\r\n<p>With powerful processors, stunning displays, and feature-rich software, Xiaomi phones elevate your mobile experience to a whole new level. With top-tier camera systems, capture every moment with vivid detail and clarity, from dazzling landscapes to stunning portraits. Powered by cutting-edge processors and optimized software, Xiaomi phones deliver a seamless and fluid performance. Whether you're gaming, multitasking, or streaming, these devices keep up with your pace.Explore the collection of Xiaomi phones at Pickaboo and experience the innovation, quality, and value that redefine what a smartphone can be.</p>\r\n<h3>OPPO Phones:</h3>\r\n<p>Capture moments in style with OPPO smartphones, renowned for their exceptional cameras and sleek designs. Crafted with meticulous attention to detail, Oppo devices boast elegant designs that reflect your style and make a statement wherever you go. Explorethe curated selection of Oppo phones at Pickaboo.</p>\r\n<h3>vivo Phones:</h3>\r\n<p>Vivo phones are designed to captivate your senses with stunning displays that bring your content to life. Whether you're watching videos, browsing photos, or playing games, the vibrant colors and sharp resolutions ensure an immersive visual journey. Powered by high-performance processors and optimized software, Vivo phones ensure seamless multitasking, smooth gaming, and swift app launches. Discover the range of Vivo smartphones at Pickaboo.</p>\r\n<p>At Pickaboo, we're proud to present a stellar lineup of the most renowned and trusted mobile phone brands in the industry. You can also explore other iconic brands like OnePlus, itel, Symphony, benco, Nothing, iPhone, Motorola, Nokia, and more, each contributing its own unique blend of innovation, style, and performance to the world of mobile technology.</p>\r\n<h2 style=\"font-size: 19px;\">Best Mobile Phone Price List in Bangladesh in 2025</h2>\r\n<table>\r\n<tbody>\r\n<tr>\r\n<th>Mobile Phone List</th>\r\n<th>Price in BD</th>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/zte-blade-a35-4gb-64gb\"> ZTE Blade A35 4GB/64GB </a></td>\r\n<td>7,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/realme-note-60x-4gb-64gb\">realme Note 60x 4GB/64GB</a></td>\r\n<td>10,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/vivo-y03t-4gb-128gb\"> vivo Y03t 4GB128GB </a></td>\r\n<td>12,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/honor-x5b-plus-4gb-128gb\">HONOR X5b Plus 4GB/128GB</a></td>\r\n<td>12,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/realme-note-60-4gb-128gb\">realme Note 60 4GB/128GB</a></td>\r\n<td>12,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/honor-x6b-6gb-128gb\">HONOR X6b 6GB/128GB</a></td>\r\n<td>14,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/oneplus-nord-n30-se-5g-4gb-128gb\">OnePlus Nord N30 SE 5G 4GB/128GB</a></td>\r\n<td>16,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/realme-c75-8gb-128gb\">realme C75 24GB (8GB+16GB)/128GB</a></td>\r\n<td>19,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/oneplus-nord-ce-4-lite-5g-8gb-256gb\">OnePlus Nord CE 4 Lite 5G 8GB/256GB</a></td>\r\n<td>27,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/redmi-note-14-8gb-256gb\">Redmi Note 14 8GB/256GB</a></td>\r\n<td>26,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/infinix-hot-50-pro-x6880-8gb-256gb\">Infinix Hot 50 Pro+ 8GB/256GB</a></td>\r\n<td>23,999৳</td>\r\n</tr>\r\n<tr>\r\n<td><a href=\"https://www.pickaboo.com/product-detail/samsung-galaxy-a16-5g-6gb-128gb\">Samsung Galaxy A16 5G 6GB/128GB</a></td>\r\n<td>27,999৳</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<h2 style=\"font-size: 19px;\">Buy the Best SmartPhone from Pickaboo- the most trusted online shopping store in Bangladesh</h2>\r\n<p>We're not just a marketplace; we're your trusted partner in elevating your online mobile shopping experience. Here's why buying the best phones from Pickaboo is a decision that ensures you're always steps ahead in the tech game</p>\r\n<h4 style=\"font-size: 17px;\">0% EMI Facility</h4>\r\n<p>With Pickaboo's 0% EMI facility, we provide manageable installments, ensuring you stay within your budget.</p>\r\n<h4 style=\"font-size: 17px;\">Official Brand Warranty</h4>\r\n<p>All our phones come with official brand warranties that safeguard your investment. From manufacturing defects to unexpected glitches, you can trust that your device is covered by the brand's dedicated customer support and service network.</p>\r\n<h4 style=\"font-size: 17px;\">3 Day Easy Return:</h4>\r\n<p>Your satisfaction is our top priority. We believe in making your shopping experience smooth and risk-free. That's why we offer a hassle-free 3-day easy return policy. If you're not completely satisfied with your purchase, you have the flexibility to return it within 3 days.</p>\r\n<h4 style=\"font-size: 17px;\">Seamless Online Experience:</h4>\r\n<p>Navigating our user-friendly website is a breeze. Filter, compare, and explore phones based on features, prices, and brands to find the perfect fit. With detailed product descriptions, images, and customer reviews, you have all the information you need at your fingertips.</p>\r\n<h4 style=\"font-size: 17px;\">Safe and Secure Transactions:</h4>\r\n<p>Our secure payment gateway ensures that your personal and financial information is protected during every transaction. Shop with confidence, knowing that your data is in safe hands.</p>",
+    "cache_time": "2025-12-15 12:34:35"
+}
