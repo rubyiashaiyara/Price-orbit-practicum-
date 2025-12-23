@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-12">
+  <h2 class="text-3xl font-bold mb-8 text-gray-900">All Products</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {% for product in products %}
+      <div class="group bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+        
+        <!-- Product Image Placeholder -->
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 h-48 flex items-center justify-center">
+          <span class="text-gray-400 text-sm">Product Image</span>
+        </div>
+
+        <!-- Card Content -->
+        <div class="p-5">
+          <!-- Product Title -->
+          <h3 class="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+            {{ product.product_name }}
+          </h3>
+
+          <!-- Brand & Shop Info -->
+          <div class="space-y-1 mb-3">
+            <p class="text-xs text-gray-600 flex items-center">
+              <span class="font-medium mr-1">Brand:</span>
+              <span class="text-gray-800">{{ product.brand.name }}</span>
+            </p>
+            <p class="text-xs text-gray-600 flex items-center">
+              <span class="font-medium mr-1">Shop:</span>
+              <span class="text-gray-800">{{ product.shop_id.shop_name }}</span>
+            </p>
+          </div>
+
+          <!-- Rating -->
+          {% if product.rating %}
+            <div class="flex items-center gap-1 mb-3">
+              <span class="text-yellow-500">★</span>
+              <span class="text-sm font-medium text-gray-900">{{ product.rating }}</span>
+              <span class="text-xs text-gray-500">/5</span>
+            </div>
+          {% endif %}
+
+          <!-- Price & CTA -->
+          <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+            <p class="text-2xl font-bold text-gray-900">
+              ৳{{ product.price }}
+            </p>
+            <a
+              href="{{ product.product_link }}"
+              target="_blank"
+              class="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-primary/90 transition-colors"
+            >
+              View
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    {% empty %}
+      <div class="col-span-full text-center py-12">
+        <p class="text-gray-500 text-lg">No products available at this time.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

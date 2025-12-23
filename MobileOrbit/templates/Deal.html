@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PriceFinder - Price Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#3b82f6", // vibrant blue
+            "background-light": "#ffffff",
+            "background-dark": "#0d1117", // deep dark blue
+            "surface-dark": "#161b22", // lighter dark blue for surfaces
+            "border-dark": "#30363d", // border color for dark theme
+            "text-light": "#f0f6fc", // light gray/off-white for text
+            "text-dark": "#7d8590", // secondary text color
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem", // 8px
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-background-dark text-text-light font-display">
+<div class="min-h-screen flex flex-col">
+<header class="py-4 px-6 md:px-10 sticky top-0 z-10 bg-background-dark/80 backdrop-blur-sm border-b border-border-dark">
+<div class="container mx-auto flex justify-between items-center">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-bold text-white" href="#">PriceFinder</a>
+<nav class="hidden md:flex items-center gap-6 text-text-dark">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Categories</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Deals</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Blog</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-dark transition-colors">
+<span class="material-icons-outlined text-text-dark">dark_mode</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-dark transition-colors">
+<span class="material-icons-outlined text-text-dark">person_outline</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 py-8 md:px-10 md:py-12">
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="text-2xl font-bold text-white">Search Results</h2>
+<div class="flex items-center gap-4">
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-surface-dark text-sm rounded-full text-text-light">Apple iPhone 15 Pro</span>
+</div>
+<a class="text-sm font-medium text-primary hover:underline" href="#">Edit Search</a>
+</div>
+<div class="bg-blue-500/10 border border-blue-500 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+<div class="flex-shrink-0 bg-surface-dark p-4 rounded-lg shadow-md">
+<img alt="Black iPhone with a protective case" class="w-40 h-40 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNGbfkn-f7qc5ZVhjeBA7Dl9bWD2vmOVrPe-Mb9GH03OmOm0YkFntIRAIBIJlnD0UwKbgfixI1iMIY8RyYcAuVUmS-qdBQrngh4cc5MzTOUlYGnP53dHuH-aL8AiRC5VQ3YQDdrh_eOSLMkiDgvpORBexwMuzTXL0-jJuovM1aXd5aDBNVX--Kvz6sfbig3wwspGJz2tihLc-H4yMwSRf8xMT0CoTRxAXK_czufP_fWCBdZI8n35aom8T51tat8nFpWZlJdGpB_mE"/>
+</div>
+<div class="flex-grow text-center md:text-left">
+<span class="inline-block bg-primary text-white text-xs font-semibold px-2.5 py-1 rounded-full mb-3">Best Deal</span>
+<h3 class="text-2xl font-bold text-white mb-2">Smart Suggestion: Amazon</h3>
+<p class="text-text-dark mb-4 text-sm flex items-center justify-center md:justify-start gap-2">
+<span class="material-icons-outlined text-lg text-blue-400">check_circle</span>
+                    Why it's the best: High Rating(4.9/5) + Great Price + In Stock
+                </p>
+<div class="flex items-center justify-center md:justify-start gap-4">
+<span class="text-3xl font-bold text-primary">TK999.00</span>
+<span class="text-lg text-text-dark line-through">TK1099.00</span>
+</div>
+</div>
+<div class="mt-4 md:mt-0 md:ml-auto">
+<button class="bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+                    Quick Buy
+                </button>
+</div>
+</div>
+</section>
+<section class="mb-24">
+<h2 class="text-2xl font-bold text-white mb-6">Price Comparison</h2>
+<div class="overflow-x-auto bg-surface-dark rounded-lg border border-border-dark">
+<table class="w-full text-left">
+<thead class="bg-background-dark/50">
+<tr>
+<th class="p-4 font-semibold text-sm text-text-dark">Shop</th>
+<th class="p-4 font-semibold text-sm text-text-dark">Price</th>
+<th class="p-4 font-semibold text-sm text-text-dark">Discount</th>
+<th class="p-4 font-semibold text-sm text-text-dark">Stock &amp; Deal</th>
+<th class="p-4 font-semibold text-sm text-text-dark"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<tr>
+<td class="p-4 flex items-center gap-3"><img alt="Amazon logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTArlSJYXB3HGborMtjwYuWKoBuC1Rr6kTctmJfXxsvHZxTNwjXweIYMOPd-kiiWSmvcRzuC1ZrBqKrwv0lLCdLRSjF88yzwKp2YXL_S8zQ34Qt9lfKCOKCKL7fjyJCx0vVx7vwmk4BM1hEpKU9KRVD56wpW984zft7LXJ9lFNCeY3-Hk3FX0LYwdoSkQvVv2mSEJmZlebdLz0PZPhSNTW7pUbPInIKR0ox6yjBizfpqkF14biBwJa4KmdH2zRhVgtez00dMnsq0o"/> Amazon</td>
+<td class="p-4 font-medium text-text-light">TK999.00</td>
+<td class="p-4 text-text-light">10%</td>
+<td class="p-4"><span class="text-xs font-semibold px-2 py-1 rounded-full bg-blue-900/50 text-blue-300">Best Deal</span></td>
+<td class="p-4 text-right"><button class="bg-primary text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Buy Now</button></td>
+</tr>
+<tr>
+<td class="p-4 flex items-center gap-3"><img alt="Best Buy logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnT6P_j8rbcjCgYaza1EsN44Zqddx158DKlkiAhEiE2cojVKdlKE0HNhQsm6rYwnrrdUZCM-6J_J1iRYEJsY-X1kXe3roASKKwexGGYhew_W0dwuQsVlkuQdizjB4xFfB4UIiwpdhJ4InLHfZPbaJmrx_RfYysIINvZByMHNuH86n0PrYKVs-637JJ35v1dcwrIkBj3ouKlMwRg5UYixiBvujyxh9xXDyB7jUFXSj0WTxmi5_BaVPjWB62OOT9VcOBlYqeBXyTNHI"/> Best Buy</td>
+<td class="p-4 font-medium text-text-light">TK1029.00</td>
+<td class="p-4 text-text-light">5%</td>
+<td class="p-4"><span class="text-xs font-semibold px-2 py-1 rounded-full bg-yellow-900/50 text-yellow-300">Average</span></td>
+<td class="p-4 text-right"><button class="font-medium py-2 px-4 rounded-lg bg-background-dark hover:bg-border-dark text-text-light transition-colors">Go To Shop</button></td>
+</tr>
+<tr>
+<td class="p-4 flex items-center gap-3"><img alt="Apple logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUflluC6eWcxXXZYzFt2H79-_93ON9r25D1dyYJGfbF-Sz__Ppuep9K9aC2c-95HX2MEw-yhx4-Iui5wdDr2AFviF9Rz_U2T-u-zK6ndlsolvf-xw_XIRFPSh3GypD-N9MXjbegIXjykJeOpiDX9waL61lWDtNQbFJuiO8SYmP7KRXsBgqiHOEVYE1SXc5hVOglF5blslluBw0vgP8R-PCApp2hLm5FzRmXcL4D96MeWukkTCKMjoKAod1VNQheU-wCX1JU-S93dE"/> Apple Store</td>
+<td class="p-4 font-medium text-text-light">TK1099.00</td>
+<td class="p-4 text-text-light">0%</td>
+<td class="p-4"><span class="text-xs font-semibold px-2 py-1 rounded-full bg-red-900/50 text-red-300">Overpriced</span></td>
+<td class="p-4 text-right"><button class="font-medium py-2 px-4 rounded-lg bg-background-dark hover:bg-border-dark text-text-light transition-colors">Go To Shop</button></td>
+</tr>
+<tr>
+<td class="p-4 flex items-center gap-3"><img alt="Walmart logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFvlqDJCIvAC1lN4IbOk4wOenCh7plmNuhwwA5ySEwvbxOE-iyy_0HZMO-STu_SQ89QL1TpU2i5CvgubbpXuzG6zPv5iGIqKGPJA1Xd1Juvw9dGWHqCACWTmp3ts3R5tR4DOMWG4s5nwlVHcpmtT6c9R7VXcl4yO0yTtT2NoZNEdw83W_Hxo9qx_LOtWCXjrKoZ4wPFcIu22VabiyQtf9rIo3w7V1QIISt3DmbB2a0-39-qEbY0NcXevm1PeSs9qLXj-uuEOIHfog"/> Walmart</td>
+<td class="p-4 font-medium text-text-light">TK1099.00</td>
+<td class="p-4 text-text-light">0%</td>
+<td class="p-4"><span class="text-xs font-semibold px-2 py-1 rounded-full bg-border-dark text-text-dark">Out of Stock</span></td>
+<td class="p-4 text-right"><button class="font-medium py-2 px-4 rounded-lg bg-background-dark hover:bg-border-dark text-text-light transition-colors">Go To Shop</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<footer class="bg-background-dark border-t border-border-dark">
+<div class="container mx-auto py-6 px-6 md:px-10 flex justify-between items-center text-sm text-text-dark">
+<p>© 2024 PriceFinder. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#">About Us</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
