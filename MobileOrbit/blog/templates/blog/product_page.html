@@ -1,0 +1,496 @@
+{% extends "base.html" %}
+
+{% block title %}Products | PriceFinder{% endblock %}
+
+{% block content %}
+<div class="flex justify-center py-5">
+    <div class="w-full max-w-7xl px-4 sm:px-6 md:px-8">
+
+        <!-- Hero Section with Search -->
+        <section class="py-10 md:py-12">
+            <div class="flex flex-col gap-6 items-center text-center">
+                <h1
+                    class="text-3xl font-black tracking-tight sm:text-4xl md:text-6xl text-text-light-primary dark:text-text-dark-primary drop-shadow-sm">
+                    {% if request.GET.q %}
+                    Results for "{{ request.GET.q }}"
+                    {% else %}
+                    Find the Best Price.
+                    {% endif %}
+                </h1>
+                <p class="text-lg text-text-light-secondary dark:text-text-dark-secondary max-w-2xl">
+                    Browse through our extensive collection of mobile brands and find the perfect device at the best
+                    price.
+                </p>
+
+                <form method="GET" action="{% url 'product_page' %}" class="w-full max-w-2xl mt-4 relative group"
+                    id="main-search-form">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-text-light-secondary dark:text-text-dark-secondary group-focus-within:text-primary transition-colors">search</span>
+                    </div>
+                    <input id="main-search-input" name="q" value="{{ request.GET.q|default:'' }}" autocomplete="off"
+                        class="block w-full pl-12 pr-32 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary placeholder-text-light-secondary dark:placeholder-text-dark-secondary focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none shadow-lg shadow-slate-200/50 dark:shadow-none transition-all text-base"
+                        placeholder="Search brands, products..." type="text" />
+                    <button type="submit"
+                        class="absolute right-2 top-2 bottom-2 px-6 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-colors text-sm shadow-md">
+                        Search
+                    </button>
+
+                    <div id="suggestions-container"
+                        class="absolute top-full left-0 right-0 mt-2 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden hidden">
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Products Section with Filters -->
+        <section class="py-6">
+            <div
+                class="flex items-center justify-between gap-4 mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Available
+                        Products</h2>
+                    <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full">{{ products|length }} Items</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+                <!-- Sidebar Filters -->
+                <aside class="w-full lg:w-64 flex-shrink-0 sticky top-4">
+                    <form method="GET" action="{% url 'product_page' %}" id="filter-form"
+                        class="flex flex-col gap-6 p-5 bg-surface-light dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+
+                        <div
+                            class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-4">
+                            <h3
+                                class="font-bold text-text-light-primary dark:text-text-dark-primary flex items-center gap-2">
+                                <span class="material-symbols-outlined text-lg">tune</span> Filters
+                            </h3>
+                            {% if request.GET.q or request.GET.min_price or request.GET.brand %}
+                            <a href="{% url 'product_page' %}"
+                                class="text-xs text-rose-500 font-medium hover:underline">Clear All</a>
+                            {% endif %}
+                        </div>
+
+                        {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                        {% endif %}
+
+                        <div>
+                            <label
+                                class="text-sm font-bold text-text-light-secondary dark:text-text-dark-secondary mb-3 block">Price
+                                Range (৳)</label>
+                            
+                            <!-- Error Message Container -->
+                            <div id="price-error" class="hidden mb-3 p-2 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-lg">
+                                <p class="text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">error</span>
+                                    <span>Negative values are not accepted</span>
+                                </p>
+                            </div>
+                            
+                            <div class="flex gap-2">
+                                <div class="relative w-full">
+                                    <input type="number" name="min_price" id="min-price-input" placeholder="Min"
+                                        value="{{ request.GET.min_price }}"
+                                        min="0"
+                                        class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-background-light dark:bg-background-dark text-text-light-primary dark:text-text-dark-primary focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+                                </div>
+                                <div class="relative w-full">
+                                    <input type="number" name="max_price" id="max-price-input" placeholder="Max"
+                                        value="{{ request.GET.max_price }}"
+                                        min="0"
+                                        class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-background-light dark:bg-background-dark text-text-light-primary dark:text-text-dark-primary focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-sm font-bold text-text-light-secondary dark:text-text-dark-secondary mb-2 block">Brands</label>
+                            
+                            <div class="relative mb-3">
+                                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                     <span class="material-symbols-outlined text-[16px] text-text-light-secondary dark:text-text-dark-secondary">search</span>
+                                </div>
+                                <input type="text" id="brand-search-input" placeholder="Find a brand..." 
+                                class="block w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-background-light dark:bg-background-dark text-text-light-primary dark:text-text-dark-primary focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-colors">
+                            </div>
+
+                            <div class="space-y-2 max-h-60 overflow-y-auto pr-1 custom-scrollbar" id="brand-list">
+                                {% for brand in brands %}
+                                <label class="brand-item flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" name="brand" value="{{ brand }}" 
+                                    class="rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary bg-background-light dark:bg-background-dark w-4 h-4 cursor-pointer"
+                                    {% if brand in selected_brands %}checked{% endif %}>
+                                    <span class="brand-name text-sm text-text-light-primary dark:text-text-dark-primary group-hover:text-primary transition-colors">{{ brand }}</span>
+                                </label>
+                                {% empty %}
+                                <p class="text-xs text-text-light-secondary italic">No brands found.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-colors text-sm shadow-md mt-2">
+                            Apply Filters
+                        </button>
+                    </form>
+                </aside>
+
+                <!-- Product Grid -->
+                <div class="flex-1 w-full">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for product in products %}
+
+                        <div
+                            class="flex flex-col rounded-2xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
+
+                            <a href="{% url 'deal_page' %}?q={{ product.name|urlencode }}"
+                                class="block w-full h-64 bg-white relative flex items-center justify-center p-6 border-b border-slate-100 dark:border-slate-700/50">
+                                {% if product.image %}
+                                <img src="{{ product.image }}" alt="{{ product.name }}"
+                                    class="object-contain w-full h-full mix-blend-multiply dark:mix-blend-normal transition-transform duration-500 group-hover:scale-110">
+                                {% else %}
+                                <div class="flex flex-col items-center justify-center text-slate-300">
+                                    <span class="material-symbols-outlined text-4xl">image_not_supported</span>
+                                    <span class="text-xs mt-1">No Image</span>
+                                </div>
+                                {% endif %}
+
+                                {% if product.discount_percentage %}
+                                <div
+                                    class="absolute top-3 right-3 bg-rose-500 text-white text-[10px] font-black tracking-wider px-2 py-1 rounded shadow-md z-10">
+                                    -{{ product.discount_percentage }}
+                                </div>
+                                {% endif %}
+                            </a>
+
+                            <div class="p-5 flex flex-col gap-3 flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <span
+                                        class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded">
+                                        {{ product.brand|default:"Generic" }}
+                                    </span>
+                                </div>
+
+                                <a href="{% url 'deal_page' %}?q={{ product.name|urlencode }}" class="block">
+                                    <h3 class="text-base font-bold text-text-light-primary dark:text-text-dark-primary group-hover:text-primary transition-colors leading-snug line-clamp-2"
+                                        title="{{ product.name }}">
+                                        {{ product.name }}
+                                    </h3>
+                                </a>
+
+                                <div class="mt-auto pt-2">
+                                    <div class="flex flex-col mb-3">
+                                        <div class="flex items-baseline gap-2">
+                                            <span class="font-black text-2xl text-text-light-primary dark:text-white">
+                                                {% if product.discount_price > 0 %}
+                                                ৳{{ product.discount_price }}
+                                                {% else %}
+                                                ৳{{ product.regular_price }}
+                                                {% endif %}
+                                            </span>
+                                            {% if product.discount_price > 0 %}
+                                            <span
+                                                class="text-sm text-text-light-secondary dark:text-text-dark-secondary line-through decoration-rose-500/50">
+                                                ৳{{ product.regular_price }}
+                                            </span>
+                                            {% endif %}
+                                        </div>
+
+                                        <span
+                                            class="text-xs text-text-light-secondary dark:text-text-dark-secondary flex items-center gap-1 mt-1">
+                                            <span class="material-symbols-outlined text-[14px]">storefront</span>
+                                            {{ product.store_name }}
+                                        </span>
+
+                                        <!-- Share Container -->
+                                        <!-- <div class="absolute top-3 right-3 z-50 relative">
+
+                                            
+                                            <button type="button" data-product-id="{{ product.id }}"
+                                                class="bg-white dark:bg-slate-800 p-2 rounded-full shadow hover:scale-110 transition"
+                                                title="Share Product" onclick="toggleShareMenu(event, this)">
+                                                <span class="material-symbols-outlined text-blue-500">
+                                                    share
+                                                </span>
+                                            </button>
+
+                                           
+                                            <div id="share-menu-{{ product.id }}"
+                                                class="hidden absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl p-2">
+
+                                                <button type="button"
+                                                    onclick="shareFacebook('{{ request.build_absolute_uri }}deals/?q={{ product.name|urlencode }}')"
+                                                    class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-sm">
+                                                    <span
+                                                        class="material-symbols-outlined text-blue-600">facebook</span>
+                                                    Facebook
+                                                </button>
+
+                                                <button type="button"
+                                                    onclick="shareTwitter('{{ product.name|escapejs }}', '{{ request.build_absolute_uri }}deals/?q={{ product.name|urlencode }}')"
+                                                    class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-sm">
+                                                    <span class="material-symbols-outlined text-sky-500">public</span>
+                                                    X (Twitter)
+                                                </button>
+
+                                                <button type="button"
+                                                    onclick="shareWhatsApp('{{ product.name|escapejs }}', '{{ request.build_absolute_uri }}deals/?q={{ product.name|urlencode }}')"
+                                                    class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-sm">
+                                                    <span class="material-symbols-outlined text-green-500">chat</span>
+                                                    WhatsApp
+                                                </button>
+
+                                                <button type="button"
+                                                    onclick="shareInstagram('{{ request.build_absolute_uri }}deals/?q={{ product.name|urlencode }}')"
+                                                    class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-sm">
+                                                    <span
+                                                        class="material-symbols-outlined text-pink-500">photo_camera</span>
+                                                    Instagram
+                                                </button>
+                                            </div>
+                                        </div> -->
+
+                                        <a href="{% url 'add_to_wishlist' product.id %}"
+                                            class="absolute top-2.5 pt-2 pl-2 pr-2 left-3 dark:bg-slate-800 rounded-full shadow hover:scale-110 transition"
+                                            title="Add to Wishlist">
+                                            <span class="material-symbols-outlined text-rose-500">
+                                                favorite
+                                            </span>
+                                        </a>
+
+                                         <!-- {% if user.is_authenticated %}
+                                        <a href="{% url 'add_to_wishlist' product.id %}"
+                                            class="px-3 py-2 bg-rose-500 text-white rounded-xl text-sm font-bold hover:bg-rose-600 transition">
+                                            ❤️ Wishlist
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}"
+                                            class="px-3 py-2 bg-slate-200 text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-300 transition">
+                                            ❤️ Wishlist
+                                        </a>
+                                        {% endif %} -->
+
+                                        
+
+                                    </div>
+
+                                    <div class="flex gap-2">
+                                        <a href="{% url 'deal_page' %}?q={{ product.name|urlencode }}"
+                                            class="flex-1 flex items-center justify-center px-3 py-2.5 bg-slate-100 dark:bg-slate-800 text-text-light-primary dark:text-white text-sm font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                            View Deals
+                                        </a>
+                                        <a href="{{ product.link }}" target="_blank"
+                                            class="flex-1 flex items-center justify-center px-3 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-blue-600 shadow-lg shadow-blue-500/20 transition-colors gap-1">
+                                            Buy Now
+                                            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div
+                            class="col-span-full py-20 flex flex-col items-center justify-center text-center bg-surface-light dark:bg-surface-dark rounded-3xl border border-dashed border-slate-300 dark:border-slate-700">
+                            <div
+                                class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
+                                <span
+                                    class="material-symbols-outlined text-3xl text-text-light-secondary dark:text-text-dark-secondary">inventory_2</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-text-light-primary dark:text-text-dark-primary">No
+                                products found</h3>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary mt-1">Try adjusting your
+                                search or filters.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // 1. Price Validation Logic
+        const minPriceInput = document.getElementById('min-price-input');
+        const maxPriceInput = document.getElementById('max-price-input');
+        const priceError = document.getElementById('price-error');
+        const filterForm = document.getElementById('filter-form');
+
+        function validatePriceInputs() {
+            const minValue = parseFloat(minPriceInput.value);
+            const maxValue = parseFloat(maxPriceInput.value);
+            
+            let hasError = false;
+
+            // Check for negative values
+            if ((minPriceInput.value && minValue < 0) || (maxPriceInput.value && maxValue < 0)) {
+                hasError = true;
+            }
+
+            if (hasError) {
+                priceError.classList.remove('hidden');
+                minPriceInput.classList.add('border-rose-500', 'dark:border-rose-500');
+                maxPriceInput.classList.add('border-rose-500', 'dark:border-rose-500');
+                return false;
+            } else {
+                priceError.classList.add('hidden');
+                minPriceInput.classList.remove('border-rose-500', 'dark:border-rose-500');
+                maxPriceInput.classList.remove('border-rose-500', 'dark:border-rose-500');
+                return true;
+            }
+        }
+
+        if (minPriceInput && maxPriceInput) {
+            // Validate on input
+            minPriceInput.addEventListener('input', validatePriceInputs);
+            maxPriceInput.addEventListener('input', validatePriceInputs);
+
+            // Prevent form submission with negative values
+            filterForm.addEventListener('submit', function(e) {
+                if (!validatePriceInputs()) {
+                    e.preventDefault();
+                    
+                    // Scroll to error message
+                    priceError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+
+        // 2. Sidebar Brand Filter Logic
+        const brandSearchInput = document.getElementById('brand-search-input');
+        const brandList = document.getElementById('brand-list');
+
+        if (brandSearchInput && brandList) {
+            const brandItems = brandList.querySelectorAll('.brand-item');
+
+            brandSearchInput.addEventListener('input', function (e) {
+                const searchTerm = e.target.value.toLowerCase();
+
+                brandItems.forEach(item => {
+                    const brandName = item.querySelector('.brand-name').textContent.toLowerCase();
+
+                    if (brandName.includes(searchTerm)) {
+                        item.classList.remove('hidden');
+                        item.classList.add('flex');
+                    } else {
+                        item.classList.add('hidden');
+                        item.classList.remove('flex');
+                    }
+                });
+            });
+        }
+
+        // 3. Main Search Bar Autocomplete Logic
+        const mainSearchInput = document.getElementById('main-search-input');
+        const suggestionsContainer = document.getElementById('suggestions-container');
+        const mainSearchForm = document.getElementById('main-search-form');
+        let debounceTimer;
+
+        if (mainSearchInput && suggestionsContainer) {
+
+            mainSearchInput.addEventListener('input', function (e) {
+                const query = e.target.value.trim();
+
+                clearTimeout(debounceTimer);
+
+                if (query.length < 2) {
+                    suggestionsContainer.classList.add('hidden');
+                    suggestionsContainer.innerHTML = '';
+                    return;
+                }
+
+                debounceTimer = setTimeout(() => {
+                    fetch(`/product/autocomplete/?term=${encodeURIComponent(query)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.length > 0) {
+                                const html = data.map(item => `
+                                    <div class="suggestion-item px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors text-text-light-primary dark:text-text-dark-primary text-sm flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 last:border-0">
+                                        <span class="material-symbols-outlined text-base text-text-light-secondary">search</span>
+                                        <span>${item}</span>
+                                    </div>
+                                `).join('');
+
+                                suggestionsContainer.innerHTML = html;
+                                suggestionsContainer.classList.remove('hidden');
+
+                                document.querySelectorAll('.suggestion-item').forEach(item => {
+                                    item.addEventListener('click', function () {
+                                        const text = this.querySelector('span:last-child').textContent;
+                                        mainSearchInput.value = text;
+                                        suggestionsContainer.classList.add('hidden');
+                                        mainSearchForm.submit();
+                                    });
+                                });
+                            } else {
+                                suggestionsContainer.classList.add('hidden');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching suggestions:', error);
+                        });
+                }, 300);
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!mainSearchForm.contains(e.target)) {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            });
+
+            mainSearchInput.addEventListener('focus', function () {
+                if (mainSearchInput.value.length >= 2) {
+                    mainSearchInput.dispatchEvent(new Event('input'));
+                }
+            });
+        }
+    });
+
+    function toggleShareMenu(event, button) {
+        event.stopPropagation(); 
+
+        const productId = button.dataset.productId;
+        const menu = document.getElementById(`share-menu-${productId}`);
+
+        document.querySelectorAll('[id^="share-menu-"]').forEach(m => {
+            if (m !== menu) m.classList.add('hidden');
+        });
+
+        menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function () {
+        document.querySelectorAll('[id^="share-menu-"]').forEach(menu => {
+            menu.classList.add('hidden');
+        });
+    });
+
+    function shareFacebook(url) {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
+    }
+
+    function shareTwitter(title, url) {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), '_blank');
+    }
+
+    function shareWhatsApp(title, url) {
+        window.open('https://wa.me/?text=' + encodeURIComponent(title + ' ' + url), '_blank');
+    }
+
+    function shareInstagram(url) {
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link copied! Paste it on Instagram.');
+            window.open('https://www.instagram.com/', '_blank');
+        });
+    }
+</script>
+{% endblock %}

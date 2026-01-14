@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Shop Directory | PriceFinder{% endblock %}
+
+{% block content %}
+<main class="flex-1">
+    <section class="bg-surface border-b border-border-color py-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+            <h1 class="text-2xl md:text-3xl font-bold mb-8 text-center md:text-left text-text-primary">Shop Directory</h1>
+            <div class="flex w-full flex-col md:flex-row gap-4">
+                <div class="flex-1 relative flex items-center shadow-sm p-2 bg-white border border-border-color rounded-xl focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                    <span class="material-symbols-outlined ml-3 text-text-secondary">search</span>
+                    <label class="w-full">
+                        <span class="sr-only">Search for a shop...</span>
+                        <input class="form-input h-10 w-full border-none bg-transparent px-3 text-base placeholder:text-gray-400 focus:outline-0 focus:ring-0 text-text-primary" 
+                               placeholder="Search stores like 'Picaboo' or 'Dazzle'..." 
+                               value=""/>
+                    </label>
+                </div>
+                <button class="flex h-14 w-full md:w-auto min-w-[140px] cursor-pointer items-center justify-center rounded-xl bg-primary px-8 text-lg font-bold text-white shadow-md transition-all hover:bg-primary/90 active:scale-[0.98]">
+                    Search
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-12 bg-app-bg">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+            <h3 class="text-lg font-bold mb-6 text-text-primary">All Shops</h3>
+            <div class="flex flex-col gap-4">
+                
+                {% for shop in shops %}
+                <details class="group bg-surface border border-border-color rounded-xl shadow-sm overflow-hidden" {% if forloop.first %}open{% endif %}>
+                    <summary class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 flex items-center justify-center shrink-0">
+                                <!-- Shop logo placeholder -->
+                                <img alt="{{ shop.shop_name }}" class="w-full h-full object-contain" 
+                                     src="https://ui-avatars.com/api/?name={{ shop.shop_name|urlencode }}&background=random"/>
+                            </div>
+                            <span class="text-lg font-bold text-text-primary">{{ shop.shop_name }}</span>
+                        </div>
+                        <span class="material-symbols-outlined text-text-secondary transition-transform group-open:rotate-180 expand-icon">expand_more</span>
+                        </summary>
+                    <div class="border-t border-border-color p-6 md:p-8 bg-surface">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <div class="w-32 h-32 md:w-40 md:h-40 bg-white rounded-2xl flex items-center justify-center p-4 border border-border-color shadow-sm shrink-0 overflow-hidden">
+                                <!-- Larger shop logo -->
+                                <img alt="Shop Logo" class="w-full h-full object-contain" 
+                                     src="https://ui-avatars.com/api/?name={{ shop.shop_name|urlencode }}&background=random"/>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                                    <div>
+                                        <h2 class="text-3xl font-black tracking-tight mb-2 text-text-primary">{{ shop.shop_name }}</h2>
+                                        <div class="flex items-center justify-center md:justify-start gap-2 text-primary">
+                                            <span class="material-symbols-outlined text-sm">verified</span>
+                                            <span class="text-sm font-semibold">Verified Retailer</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        {% if shop.shop_url %}
+                                        <a class="flex items-center justify-center gap-2 h-11 px-6 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-colors shadow-sm text-sm" 
+                                           href="{{ shop.shop_url }}" target="_blank">
+                                            <span class="material-symbols-outlined text-lg">open_in_new</span> Visit Website
+                                        </a>
+                                        {% endif %}
+                                        {% if shop.shop_fb_link %}
+                                        <a class="flex items-center justify-center gap-2 h-11 px-6 bg-[#1877F2] text-white rounded-lg font-bold hover:opacity-90 transition-colors shadow-sm text-sm" 
+                                           href="{{ shop.shop_fb_link }}" target="_blank">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg> Facebook
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <p class="text-text-secondary leading-relaxed max-w-2xl text-base">
+                                    <!-- Add a description field to your Shop model for dynamic text -->
+                                    Premium retailer offering quality products and exceptional service.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        {% if shop.outlets.exists %}
+                        <div class="mt-8 pt-8 border-t border-border-color">
+                            <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-text-primary">
+                                <span class="material-symbols-outlined text-primary">location_on</span> Physical Outlets
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {% for outlet in shop.outlets.all %}
+                                <div class="p-6 rounded-xl bg-gray-50 border border-border-color hover:border-primary/30 transition-colors">
+                                    <h4 class="font-bold mb-3 text-text-primary">{{ outlet.outlet_name }}</h4>
+                                    <p class="text-sm text-text-secondary leading-relaxed">{{ outlet.outlet_address }}</p>
+                                    {% if outlet.phone_number %}
+                                    <p class="text-sm text-text-secondary mt-2">📞 {{ outlet.phone_number }}</p>
+                                    {% endif %}
+                                    {% if outlet.off_day %}
+                                    <div class="mt-4 flex items-center gap-2 text-xs font-bold text-primary uppercase">
+                                        <span class="material-symbols-outlined text-xs">schedule</span>
+                                        Off Day: {{ outlet.off_day }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="mt-8 pt-8 border-t border-border-color">
+                            <div class="text-center py-6 text-text-secondary">
+                                <p>No physical outlets available for this shop.</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                    </div>
+                </details>
+                {% empty %}
+                <div class="text-center py-10 text-text-secondary">
+                    <p>No shops found in the directory.</p>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

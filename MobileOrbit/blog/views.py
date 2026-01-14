@@ -1,223 +1,258 @@
 from django.shortcuts import render
-
-
-# # Create your views here.
-# from django.shortcuts import render, get_object_or_404
-# from .models import ProductDetails, Brand, Shop, ShopOutlet
-# from django.http import JsonResponse
-# from django.core.management import call_command
-
-# # ------------------------
-# # Home / List all products
-# # ------------------------
-# def product_list(request):
-#     products = ProductDetails.objects.all()  # fetch all products
-#     return render(request, "products/product_list.html", {"products": products})
-
-# # ------------------------
-# # Product detail page
-# # ------------------------
-# def product_detail(request, product_id):
-#     product = get_object_or_404(ProductDetails, id=product_id)
-#     return render(request, "products/product_detail.html", {"product": product})
-
-# # ------------------------
-# # Brand list
-# # ------------------------
-# def brand_list(request):
-#     brands = Brand.objects.all()
-#     return render(request, "products/brand_list.html", {"brands": brands})
-
-# # ------------------------
-# # Shop list
-# # ------------------------
-# def shop_list(request):
-#     shops = Shop.objects.all()
-#     return render(request, "products/shop_list.html", {"shops": shops})
-
-# # ------------------------
-# # ShopOutlet list for a specific shop
-# # ------------------------
-# def shop_outlets(request, shop_id):
-#     shop = get_object_or_404(Shop, id=shop_id)
-#     outlets = shop.outlets.all()  # using related_name='outlets'
-#     return render(request, "products/shop_outlets.html", {"shop": shop, "outlets": outlets})
-
-
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Brand, Shop, ProductDetails
-from .scraper import scrape_dazzle, scrape_pickaboo, scrape_rio, scrape_mobileclub
+from .scraper import run_all_scrapers
+from django.db.models import Q
+from .models import Wishlist
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Product, ProductListing, Wishlist, Shop, Product, ProductListing
 
 
-# -------------------------------
-# PRICE CLEANER
-# -------------------------------
-def clean_price(price_str):
-    """
-    Converts: "৳ 25,500" → 25500.0
-    """
-    try:
-        p = price_str.replace("৳", "").replace(",", "").replace("Tk", "").strip()
-        return float(p)
-    except:
-        return 0.0
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
 
-
-# -------------------------------
-# MAIN SCRAPE & SAVE VIEW
-# -------------------------------
-@csrf_exempt
-def run_all_scrapers(request):
-
-    # Create shop entries (only once)
-    dazzle_shop, _ = Shop.objects.get_or_create(
-        shop_name="Dazzle",
-        defaults={"shop_fb_link": "", "shop_url": "https://dazzle.com.bd"}
+    Wishlist.objects.get_or_create(
+        user=request.user,
+        product=product
     )
 
-    pickaboo_shop, _ = Shop.objects.get_or_create(
-        shop_name="Pickaboo",
-        defaults={"shop_fb_link": "", "shop_url": "https://pickaboo.com"}
-    )
+    return redirect(request.META.get('HTTP_REFERER', 'product_page'))
 
-    rio_shop, _ = Shop.objects.get_or_create(
-        shop_name="Rio International",
-        defaults={"shop_fb_link": "", "shop_url": "https://riointernational.com.bd"}
-    )
 
-    mobileclub_shop, _ = Shop.objects.get_or_create(
-        shop_name="Mobile Club",
-        defaults={"shop_url": "https://www.mobileclub.com.bd"}
-    )
-    saved_count = 0
+@login_required
+def wishlist_page(request):
+    wishlist_items = Wishlist.objects.select_related('product').filter(user=request.user)
 
-    # -------------------------------
-    # 1. SCRAPE DAZZLE
-    # -------------------------------
-    dazzle_data = scrape_dazzle()
-
-    for item in dazzle_data:
-        brand_name = detect_brand(item["name"])
-        brand, _ = Brand.objects.get_or_create(name=brand_name)
-
-        ProductDetails.objects.create(
-            product_name=item["name"],
-            brand=brand,
-            shop_id=dazzle_shop,
-            price=clean_price(item["price"]),
-            product_link=item["link"],
-            rating=None,
-            product_info="",
-            stock=""
-        )
-        saved_count += 1
-
-    # -------------------------------
-    # 2. SCRAPE PICKABOO
-    # -------------------------------
-    pickaboo_data = scrape_pickaboo()
-    
-
-    for item in pickaboo_data:
-        brand_name = detect_brand(item["name"])
-        brand, _ = Brand.objects.get_or_create(name=brand_name)
-
-        ProductDetails.objects.create(
-            product_name=item["name"],
-            brand=brand,
-            shop_id=pickaboo_shop,
-            price=clean_price(item["price"]),
-            product_link=item["link"],
-            rating=None,
-            product_info="",
-            stock=""
-        )
-        saved_count += 1
-        
-        
-      # -------------------------------
-    # 4. SCRAPE MOBILE CLUB (API)
-    # -------------------------------
-    mobileclub_data = scrape_mobileclub()
-
-    for item in mobileclub_data:
-        brand, _ = Brand.objects.get_or_create(name=item["brand"])
-
-        ProductDetails.objects.create(
-            product_name=item["name"],
-            brand=brand,
-            shop_id=mobileclub_shop,
-            price=clean_price(item["price"]),
-            product_link=item.get("link", ""),
-            rating=None,
-            product_info="",
-            stock=item.get("stock", "")
-        )
-        saved_count += 1
-
-    # -------------------------------
-    # 3. SCRAPE RIO INTERNATIONAL
-    # -------------------------------
-    rio_data = scrape_rio()
-
-    for item in rio_data:
-        brand_name = detect_brand(item["name"])
-        brand, _ = Brand.objects.get_or_create(name=brand_name)
-
-        ProductDetails.objects.create(
-            product_name=item["name"],
-            brand=brand,
-            shop_id=rio_shop,
-            price=clean_price(item["price"]),
-            product_link=item["link"],
-            rating=None,
-            product_info="",
-            stock=""
-        )
-        saved_count += 1
-
-    # -------------------------------
-    # RESPONSE
-    # -------------------------------
-    return JsonResponse({
-        "status": "success",
-        "message": "All scrapers completed successfully!",
-        "total_data_saved": saved_count,
+    return render(request, 'blog/wishlist.html', {
+        'wishlist_items': wishlist_items
     })
 
-
-
-def home(request):
-    products = ProductDetails.objects.all() 
-    return render(request, 'base.html', {'products': products})
-
-def product(request):
-    products = ProductDetails.objects.select_related("brand", "shop_id").all()
+@login_required
+def shop_list(request):
+    # Fetch all shops
+    shops = Shop.objects.prefetch_related('outlets').all()
 
     context = {
-        "products": products
+        "shops": shops,
     }
-    return render(request, "product.html", context)
 
-from .models import Brand
+    return render(request, "blog/Shop.html", context)
 
-def detect_brand(product_name):
-    product_name = product_name.lower()
+def product_autocomplete(request):
+    """
+    API View: Returns a list of product names for the search bar autocomplete.
+    """
+    if 'term' in request.GET:
+        term = request.GET.get('term')
+        # Filter products containing the term (case-insensitive)
+        # We assume you want to suggest product names
+        qs = Product.objects.filter(name__icontains=term)
+        # Limit to 8 results for performance
+        titles = list(qs.values_list('name', flat=True)[:8])
+        return JsonResponse(titles, safe=False)
+    return JsonResponse([], safe=False)
 
-    for brand in Brand.objects.values_list("name", flat=True):
-        if brand.lower() in product_name:
-            return brand
-
-    return "Unknown"
-
-def clean_price(price_str):
-    try:
-        return float(
-            price_str.replace("৳", "")
-                     .replace(",", "")
-                     .replace("Tk", "")
-                     .strip()
+def product_page(request):
+    """
+    Main Product Page: Handles listing, searching, and filtering.
+    """
+    # Start with all products sorted by newest
+    products = Product.objects.all().order_by('-created_at')
+    
+    # 1. Main Search Query 'q' (from the search bar)
+    query = request.GET.get('q')
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) | 
+            Q(brand__icontains=query) |
+            Q(store_name__icontains=query)
         )
-    except:
-        return 0.0
+
+    # 2. Filter by Price Range
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    if min_price:
+        try:
+            products = products.filter(discount_price__gte=int(min_price))
+        except ValueError:
+            pass # Ignore invalid input
+            
+    if max_price:
+        try:
+            # Note: Assuming you want to filter based on the selling price (discount_price)
+            products = products.filter(discount_price__lte=int(max_price))
+        except ValueError:
+            pass
+
+    # 3. Filter by Brands (Checkbox list)
+    # request.GET.getlist allows retrieving multiple selected checkboxes
+    selected_brands = request.GET.getlist('brand')
+    if selected_brands:
+        products = products.filter(brand__in=selected_brands)
+
+    # 4. Get a list of all unique brands for the sidebar
+    all_brands = Product.objects.values_list('brand', flat=True).distinct().order_by('brand')
+
+    context = {
+        'products': products,
+        'brands': all_brands,
+        'selected_brands': selected_brands, # To keep checkboxes checked after reload
+    }
+    
+    return render(request, 'blog/product_page.html', context)
+
+def home(request):
+    return render(request, 'base.html')
+
+def blog_page(request):
+    return render(request, 'blog.html')
+
+@login_required
+def deal_page(request, product_id):
+    product = Product.objects.get(id=product_id)
+    
+    # You must query ALL listings for this product
+    listings = ProductListing.objects.filter(product=product) 
+    
+    context = {
+        'product': product,
+        'listings': listings, # This is what populates the table
+    }
+    return render(request, 'Deal.html', context)
+# def deal_page(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+
+#     listings = ProductListing.objects.select_related("shop").filter(product=product)
+
+#     deals = []
+#     for listing in listings:
+#         deals.append({
+#             "shop": listing.shop.shop_name,
+#             "shop_logo_url": listing.shop.logo.url if hasattr(listing.shop, "logo") and listing.shop.logo else None,
+#             "price": listing.price,
+#             "regular_price": listing.old_price,
+#             "discount_percentage": listing.discount_percent(),
+#             "in_stock": listing.in_stock,
+#             "rating": getattr(listing.shop, "rating", None),
+#             "link": listing.link,
+#         })
+#     print("deals: ", deals)
+#     in_stock_deals = [d for d in deals if d["in_stock"]]
+#     best_deal = min(in_stock_deals, key=lambda x: x["price"], default=None)
+
+#     return render(request, "Deal.html", {
+#         "product": product,
+#         "deals": deals,
+#         "best_deal": best_deal,
+#     })
+
+
+def trigger_scraping(request):
+    """
+    Runs scrapers and returns JSON status.
+    """
+    try:
+        run_all_scrapers()
+        return JsonResponse({
+            "status": "success", 
+            "message": "All scraping completed successfully! Data saved to database."
+        })
+    except Exception as e:
+        return JsonResponse({
+            "status": "error", 
+            "message": str(e)
+        }, status=500)
+
+def home_search_view(request):
+    # This seems redundant now that logic is in product_page, 
+    # but keeping it if you use it on the homepage separately.
+    products = Product.objects.all().order_by('-created_at')
+    query = request.GET.get('q')
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) | 
+            Q(brand__icontains=query) |
+            Q(store_name__icontains=query)
+        )
+    return render(request, 'base.html', {'products': products})
+
+# def deal_search_view(request):
+#     query = request.GET.get('q')
+#     context = {
+#         'query': query,
+#         'product': None,
+#         'listings': [],
+#         'best_deal': None
+#     }
+    
+#     # Only run logic if there is a query
+#     if query:
+#         found_products = Product.objects.filter(name__icontains=query)
+#         if found_products.exists():
+#             target_product = found_products.first()
+#             listings = ProductListing.objects.filter(product=target_product).order_by('price')
+#             context['product'] = target_product
+#             context['listings'] = listings
+#             if listings.exists():
+#                 context['best_deal'] = listings.first()
+
+#     return render(request, 'deal.html', context)
+
+
+@login_required
+def deal_search_view(request):
+    query = request.GET.get('q', '').strip()
+
+    context = {
+        'query': query,
+        'product': None,
+        'deals': [],
+        'best_deal': None,
+    }
+
+    if not query:
+        return render(request, 'Deal.html', context)
+
+    # 🔍 Find all similar products
+    products = Product.objects.filter(name__icontains=query)
+
+    if not products.exists():
+        return render(request, 'Deal.html', context)
+
+    # Use first product as main reference
+    main_product = products.first()
+    context['product'] = main_product
+
+    deals = []
+    for product in products:
+        deals.append({
+            "shop": product.store_name,
+            "shop_logo_url": None,  # optional
+            "price": product.discount_price if product.discount_price > 0 else product.regular_price,
+            "regular_price": product.regular_price,
+            "discount_percentage": product.discount_percentage,
+            "in_stock": True,  # static
+            "link": product.link,
+        })
+
+    # Sort by lowest price
+    deals = sorted(deals, key=lambda x: x["price"])
+    context['deals'] = deals
+    context['best_deal'] = deals[0] if deals else None
+
+    return render(request, 'Deal.html', context)
+
+def search_suggestions(request):
+    query = request.GET.get('q', '')
+    if query:
+        # Filter the products based on the query (you can adjust this as needed)
+        suggestions = Product.objects.filter(name__icontains=query)[:5]
+        suggestions_list = [{'name': product.name} for product in suggestions]
+        return JsonResponse(suggestions_list, safe=False)
+    return JsonResponse([], safe=False)
+
+def deals_admin(request):
+    return render(request, 'deals_admin.html')
+

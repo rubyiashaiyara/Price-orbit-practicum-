@@ -2,87 +2,94 @@ import requests
 import json
 import time
 
-# --- ১. ডেটা এক্সট্র্যাকশন ফাংশন ---
-def fetch_and_extract_pickaboo():
-    # API URL (স্মার্টফোন ক্যাটাগরি)
-    url = "https://www.pickaboo.com/rest/V1/categorypageapi/smartphone?prodLimit=20&currentPage=1&featProdLimit=6&web=1"
-
-    # Headers
+def fetch_pickaboo_data():
+    base_url = "https://www.pickaboo.com/rest/V1/categorypageapi/smartphone"
+    
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Accept": "application/json"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
 
-    print("--- Pickaboo API থেকে ডেটা আনা হচ্ছে ---")
-    
-    try:
-        response = requests.get(url, headers=headers, timeout=10) # 10 সেকেন্ড টাইমআউট যোগ করা হলো
+    all_products = []
+    print("Starting data fetch...")
+
+    # Loop through pages 1 to 10
+    for page in range(1, 10):
+        params = {
+            "currentPage": page,
+            "featProdLimit": 6,
+            "web": 1
+        }
+
+        try:
+            print(f"Fetching page {page}...")
+            response = requests.get(base_url, params=params, headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                products = data.get("cat_prods", [])
+                
+                if not products:
+                    print(f"No more products found on page {page}.")
+                    break
+
+                for prod in products:
+                    name = prod.get("product_name", "Unknown")
+                    brand = name.split(" ")[0] if name else "Unknown"
+                    
+                    # Get Prices
+                    regular_price = prod.get("product_price", 0)
+                    special_price = prod.get("product_specialPrice", 0)
+                    
+                    # --- CALCULATE DISCOUNT PERCENTAGE ---
+                    discount_pct = 0
+                    if regular_price and special_price and regular_price > special_price:
+                        # Formula: ((Regular - Special) / Regular) * 100
+                        discount_pct = int(((regular_price - special_price) / regular_price) * 100)
+                    
+                    discount_display = f"{discount_pct}%" if discount_pct > 0 else "N/A"
+
+                    # --- PRODUCT LINK LOGIC ---
+                    # Retrieve the slug. Common keys in this API are 'url_key' or 'slug'.
+                    # We check 'url_key' first, then 'slug', then 'product_url_key' just in case.
+                    slug = prod.get("url_key") or prod.get("slug") or prod.get("product_url_key")
+                    
+                    # Construct the link
+                    if slug:
+                        product_link = f"https://www.pickaboo.com/product-detail/{slug}"
+                    else:
+                        product_link = "N/A"
+
+                    # Extract specific fields
+                    product_info = {
+                        "Image": prod.get("product_img"),
+                        "Name": name,
+                        "Brand": brand,
+                        "Regular Price": regular_price,
+                        "Discount Price": special_price,
+                        "Discount Percentage": discount_display,
+                        "Product Link": product_link  # <--- Added Field
+                    }
+                    
+                    # Only add valid products (Price check)
+                    if product_info["Regular Price"]:
+                        all_products.append(product_info)
+            else:
+                print(f"Failed to fetch page {page}. Status Code: {response.status_code}")
         
-        if response.status_code != 200:
-            print(f"❌ API Error: HTTP Status Code {response.status_code}")
-            return
+        except Exception as e:
+            print(f"An error occurred on page {page}: {e}")
 
-        data = response.json()
-        products_list = data.get("items", [])
-        extracted_products = []
+        # Politeness delay
+        time.sleep(1)
 
-        # ডেটার কাঠামো চেক করা
-        if not products_list:
-            print("🛑 সতর্কতা: ডেটা পাওয়া গেছে, কিন্তু 'items' কী-এর ভেতরে কোনো প্রোডাক্ট লিস্ট নেই।")
-            # ডিবাগিং এর জন্য র' ডেটা সেভ করা
-            with open("pickaboo_debug_raw.json", "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=4, ensure_ascii=False)
-            print("   দয়া করে 'pickaboo_debug_raw.json' ফাইলটি খুলে দেখুন প্রোডাক্ট লিস্ট কোন নামে আছে।")
-            return
+    print(f"\nSuccessfully fetched {len(all_products)} products.")
+    
+    # Save to JSON format
+    output_filename = "pickaboo_smartphones_with_links.json"
+    with open(output_filename, "w", encoding="utf-8") as f:
+        json.dump(all_products, f, indent=4, ensure_ascii=False)
+    
+    print(f"Data saved to {output_filename}")
 
-        print(f"✅ মোট {len(products_list)} টি প্রোডাক্ট পাওয়া গেছে। পার্সিং করা হচ্ছে...")
-
-        for item in products_list:
-            brand_name = None
-            
-            # ১. সরাসরি 'brand' ফিল্ড থেকে নাম নেওয়ার চেষ্টা
-            if item.get("brand"):
-                brand_name = item.get("brand")
-            
-            # ২. যদি সরাসরি না পাওয়া যায়, তবে custom_attributes-এর ভেতরে খোঁজা
-            if not brand_name:
-                custom_attributes = item.get("custom_attributes", [])
-                for attr in custom_attributes:
-                    code = attr.get("attribute_code")
-                    if code == "manufacturer" or code == "brand":
-                        brand_name = attr.get("value")
-                        break
-            
-            # ৩. ফাইনাল চেক
-            if not brand_name:
-                brand_name = "Unknown Brand (Check Attributes)"
-            
-            # ডেটা সংগ্রহ
-            extracted_products.append({
-                "Source": "Pickaboo",
-                "Name": item.get("name"),
-                "Brand": brand_name,
-                "Price": item.get("final_price"),
-                "SKU": item.get("sku")
-            })
-
-        # --- ২. এক্সট্র্যাক্ট করা ডেটা সেভ করা ---
-        if extracted_products:
-            try:
-                filename = "pickaboo_extracted_products.json"
-                with open(filename, "w", encoding="utf-8") as f:
-                    json.dump(extracted_products, f, indent=4, ensure_ascii=False)
-                
-                print(f"\n✅ এক্সট্র্যাকশন সফল! ডেটা সেভ করা হয়েছে: '{filename}'")
-                print("--- Sample Data Preview (First Item) ---")
-                print(json.dumps(extracted_products[0], ensure_ascii=False, indent=4))
-                
-            except Exception as e:
-                print(f"❌ ফাইল সেভ করতে সমস্যা হয়েছে: {e}")
-
-    except requests.exceptions.RequestException as e:
-        print(f"❌ কানেকশন এরর: {e}")
-
-# --- মেইন ফাংশন ---
 if __name__ == "__main__":
-    fetch_and_extract_pickaboo()
+    fetch_pickaboo_data()

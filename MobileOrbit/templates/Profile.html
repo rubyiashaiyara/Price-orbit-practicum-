@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}My Profile | PriceFinder{% endblock %}
+
+{% block content %}
+<div class="flex justify-center py-10 px-4">
+    <div class="w-full max-w-5xl space-y-8">
+
+        <!-- Profile Header -->
+        <div class="bg-white border rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6">
+            <div class="h-28 w-28 rounded-full border overflow-hidden">
+                {% if user_obj.image %}
+                    <img src="{{ user_obj.image.url }}" class="w-full h-full object-cover">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                        <span class="material-symbols-outlined text-4xl">person</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="flex-1 text-center sm:text-left">
+                <h1 class="text-2xl font-bold">
+                    {{ user_obj.first_name }} {{ user_obj.last_name }}
+                </h1>
+                <p class="text-gray-500">{{ user_obj.email }}</p>
+                <p class="text-sm text-gray-400 mt-1">
+                    Joined {{ user_obj.date_joined|date:"F Y" }}
+                </p>
+            </div>
+
+            <a href="#" class="px-4 py-2 border rounded-lg text-sm font-semibold hover:bg-gray-100">
+                Edit Profile
+            </a>
+        </div>
+
+        <!-- Account Info -->
+        <div class="bg-white border rounded-xl p-6">
+            <h2 class="text-lg font-bold mb-4">Account Information</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <p class="text-gray-500">Username</p>
+                    <p class="font-semibold">{{ user_obj.username }}</p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">Email</p>
+                    <p class="font-semibold">{{ user_obj.email }}</p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">Phone</p>
+                    <p class="font-semibold">
+                        {{ user_obj.phone_number|default:"Not set" }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">Gender</p>
+                    <p class="font-semibold">
+                        {{ user_obj.get_gender_display|default:"Not set" }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <a href="#" class="p-4 border rounded-xl hover:bg-gray-50 text-center font-semibold">
+                ❤️ Wishlist
+            </a>
+            <a href="#" class="p-4 border rounded-xl hover:bg-gray-50 text-center font-semibold">
+                🔔 Notifications
+            </a>
+            <a href="{% url 'logout' %}" class="p-4 border rounded-xl hover:bg-red-50 text-center font-semibold text-red-500">
+                🚪 Logout
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

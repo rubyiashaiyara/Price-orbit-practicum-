@@ -1,192 +1,534 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PriceFinder - Find the Best Price, Instantly.</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PriceFinder - Find the Best Price, Instantly.</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <style>
         .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .suggestion-box {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 4px;
+            z-index: 20;
+        }
+
+        .suggestion-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .scheduler {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: #111;
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: system-ui, sans-serif;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .scheduler span {
+            color: #4ade80;
         }
     </style>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#3B82F6",
-              "background-light": "#F9FAFB",
-              "background-dark": "#121212",
-              "surface-light": "#FFFFFF",
-              "surface-dark": "#1E1E1E",
-              "text-light-primary": "#111827",
-              "text-light-secondary": "#6B7280",
-              "text-dark-primary": "#E5E7EB",
-              "text-dark-secondary": "#9CA3AF",
+
+    <script>
+        const API_ENDPOINT = "/scrape/run/";
+        // const INTERVAL_HOURS = 24;
+
+        //const INTERVAL_MS = 6000;
+        const INTERVAL_MS = INTERVAL_HOURS * 60 * 60 * 1000;
+        const STORAGE_KEY = "lastScrapeRun";
+
+        async function callScrapeAPI() {
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                localStorage.setItem(STORAGE_KEY, Date.now());
+                console.log("✅ Scrape executed at", new Date().toISOString());
+            } catch (err) {
+                console.error("❌ Scrape API error:", err.message);
+            }
+        }
+
+        function isExecutionDue() {
+            const lastRun = Number(localStorage.getItem(STORAGE_KEY));
+            if (!lastRun) return true;
+            return Date.now() - lastRun >= INTERVAL_MS;
+        }
+
+        function startScheduler() {
+            console.log("⏱ 24-hour scheduler started");
+
+            // Run immediately only if 24 hours have passed
+            if (isExecutionDue()) {
+                callScrapeAPI();
+            }
+
+            // Check every 5 minutes (lightweight, safe)
+            setInterval(() => {
+                if (document.visibilityState === "visible" && isExecutionDue()) {
+                    callScrapeAPI();
+                }
+            }, 5 * 60 * 1000);
+        }
+
+        document.addEventListener("DOMContentLoaded", startScheduler);
+    </script>
+
+
+    <script>
+        function fetchSuggestions(query) {
+            if (query.length < 2) {
+                document.getElementById('suggestions').innerHTML = '';
+                return;
+            }
+            fetch(`/search-suggestions?q=${query}`)
+                .then(res => res.json())
+                .then(data => {
+                    let html = '';
+                    data.forEach(item => {
+                        html += `<div class="suggestion-item">${item.name}</div>`;
+                    });
+                    document.getElementById('suggestions').innerHTML = html;
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const input = document.querySelector('[name="q"]');
+            const box = document.getElementById('suggestions');
+
+            // Ensure input and box exist before adding listeners (important for pages that extend base)
+            if (input && box) {
+                input.addEventListener('keyup', () => fetchSuggestions(input.value));
+
+                box.addEventListener('click', e => {
+                    if (e.target.classList.contains('suggestion-item')) {
+                        input.value = e.target.textContent;
+                        box.innerHTML = '';
+                    }
+                });
+            }
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Price validation
+            const priceInput = document.getElementById('price-input');
+            const priceError = document.getElementById('price-error');
+            const searchForm = document.getElementById('search-form');
+
+            if (priceInput && priceError && searchForm) {
+                const validatePrice = () => {
+                    const value = parseFloat(priceInput.value);
+
+                    if (priceInput.value && isNaN(value)) {
+                        priceError.textContent = 'Please enter a valid number';
+                        priceError.classList.remove('hidden');
+                        return false;
+                    } else if (value < 0) {
+                        priceError.textContent = 'This price is not valid';
+                        priceError.classList.remove('hidden');
+                        return false;
+                    } else if (value < 7000) {
+                        priceError.textContent = 'Price must be at least 7,000';
+                        priceError.classList.remove('hidden');
+                        return false;
+                    } else if (value > 200000) {
+                        priceError.textContent = 'Price must be 200,000 or less';
+                        priceError.classList.remove('hidden');
+                        return false;
+                    } else {
+                        priceError.classList.add('hidden');
+                        return true;
+                    }
+                };
+
+                priceInput.addEventListener('input', validatePrice);
+                priceInput.addEventListener('blur', validatePrice);
+
+                searchForm.addEventListener('submit', (e) => {
+                    if (!validatePrice()) {
+                        e.preventDefault();
+                        priceInput.focus();
+                    }
+                });
+            }
+        });
+
+
+
+    </script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#121212",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E1E1E",
+                        "text-light-primary": "#111827",
+                        "text-light-secondary": "#6B7280",
+                        "text-dark-primary": "#E5E7EB",
+                        "text-dark-secondary": "#9CA3AF",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                },
             },
-            fontFamily: {
-              "display": ["Inter", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
+        }
     </script>
 </head>
-<body class="font-display bg-background-light dark:bg-background-dark">
-  <main>
-    {% block content %}
-      <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<div class="flex flex-1 justify-center py-5">
-<div class="layout-content-container flex flex-col w-full max-w-5xl flex-1 px-4 sm:px-6 md:px-8">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 px-4 md:px-10 py-3">
-<div class="flex items-center gap-4 text-text-light-primary dark:text-text-dark-primary">
-<div class="size-6 text-primary">
-<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_6_535)">
-<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
-</g>
-<defs>
-<clipPath id="clip0_6_535">
-<rect fill="white" height="48" width="48"></rect>
-</clipPath>
-</defs>
-</svg>
-</div>
-<h2 class="text-lg font-bold tracking-[-0.015em]">PriceFinder</h2>
-</div>
-<div class="hidden md:flex flex-1 justify-end items-center gap-8">
-<nav class="flex items-center gap-9">
-<a class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary" href="#">Shop</a>
-<a class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary" href="#">Deals</a>
-<a class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary" href="{% url 'product_page' %}">Product</a>
-<a class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary" href="#">About Us</a>
-</nav>
-<div class="flex gap-2">
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em] hover:bg-primary/90 transition-colors">
-<span class="truncate">Sign Up</span>
-</button>
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-100 dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary text-sm font-bold tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-surface-dark/80 transition-colors">
-<span class="truncate">Log In</span>
-</button>
-</div>
-</div>
-<div class="md:hidden">
-<button class="p-2 rounded-lg bg-gray-100 dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</header>
-<main>
-<section class="py-16 md:py-24">
-<div class="flex flex-col items-center gap-6 text-center">
-<h1 class="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl text-text-light-primary dark:text-text-dark-primary">
-                                Find the Best Price, Instantly.
-                            </h1>
-<p class="max-w-xl text-base sm:text-lg text-text-light-secondary dark:text-text-dark-secondary">
-                                Compare thousands of deals from your favorite online stores.
-                            </p>
-<div class="mt-4 w-full max-w-4xl px-4">
-<div class="flex w-full flex-col items-stretch gap-4 md:flex-row md:items-center">
-<div class="flex flex-1 flex-col gap-4 sm:flex-row">
-<div class="flex-1 relative flex items-center shadow-sm p-2 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/10 rounded-xl">
-<label class="w-full">
-<span class="sr-only">Search for a product, brand, or category...</span>
-<input class="form-input h-10 w-full min-w-0 resize-none overflow-hidden rounded-lg border-none bg-transparent px-2 text-base placeholder:text-text-light-secondary focus:outline-0 focus:ring-0 dark:text-text-dark-primary dark:placeholder:text-text-dark-secondary" placeholder="Search for a product..." value=""/>
-</label>
-</div>
-<div class="w-full sm:w-[280px] relative flex items-center shadow-sm p-2 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/10 rounded-xl">
-<label class="w-full">
-<span class="sr-only">Price (TK max 200000)</span>
-<input class="form-input h-10 w-full min-w-0 resize-none overflow-hidden rounded-lg border-none bg-transparent px-2 text-base placeholder:text-text-light-secondary focus:outline-0 focus:ring-0 dark:text-text-dark-primary dark:placeholder:text-text-dark-secondary" max="200000" min="0" placeholder="Price (TK max 200000)" step="0.01" type="number"/>
-</label>
-</div>
-</div>
-<button class="flex h-14 w-full min-w-[84px] max-w-[480px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-primary px-6 text-lg font-bold tracking-[0.015em] text-white shadow-sm transition-colors hover:bg-primary/90 md:w-auto">
-<span class="material-symbols-outlined text-2xl md:hidden mr-2">search</span>
-<span class="truncate">Search</span>
-</button>
-</div>
-</div>
-</div>
-</section>
-<section class="py-12">
-<h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-text-light-primary dark:text-text-dark-primary px-4 pb-6">Today's Top Deals</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Vivo logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIXiotBnnI4kNtgnpgJzYK6okYJ8zfz_2PcwH0luOKU4_gecB-OUKRPwvbjzPaGSjN3-dUBiVD_zfpX2F65mKA2wDIEhVpCz6UnUThnyOoNDVaWE6O9RHmO8pLOeFET30Bl9PY3LFxvrytU5H_k2dn0FeE9R-2ZZdrny5HWsG-hNZ9QWzT9cjFlv_YYGNtQw-LNZRubw1umEc8Wl7VBGSX6rjZzRq0-OfwRIFgjljZt77S_CH9Igj4G9WEOi-ChTPPwFaoOuaJyzk"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Samsung logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-qUmvz7k-i__dmO5GqoXOZOIT_gtIlDSpEf__YgFgG4m00UnDfp3kDFmBPOI7Ig7XJsOQ-6ez2OezzOawkkfDmhw8oarR2kd9Q-EHwAAp8UYBL8ovLJfvrvb7HB2bpZ0FLB0TczlkG89ZDVKhFh3_UBtCrX9SkNTt3HOpdJHTptOxjM-UPkgVH40Qjj1Q9HFzMF1ASsKZoN3gdEVPj9J_JqU9nS6iKRcSR4OX6HPVcd9tMuWIMfTKgKf5HulsFeTl_dPP1rGnZSQ"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Xiaomi logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHbGZZhInb_T2IVPyPYhgFxoxXokmMO6PUquJ5F2y1F9d32cjVDlhgaG7Ds6ktSypqTbBBOg6Ci7gvpBg-ime32tdVlm8bDqUeugAEKWgHfpDxBrLFnGQ51oUa8YQf4wkStlX3NOi4aUo2J5m0G59XaJ4S3tKWdfHVoWnwTjjDLG37I_dG7mJQerWzQzrkc-bVMeaxV47Tu9rBkqVh8_Xz1--iNuSQyGPQU7u-KAcVo4kxgk_ToyM7v-qZmYt0xsJCuuqa9N2YmJY"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Oppo logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNi6B6TdFxsPZn2zUSrMyjfNVev_zZomKio-DDuCr4UdbThJJ3aDVADbmyM5DRZ1vc0XBlWh75paawDeippjfai78gK1jyb6gbKIKaeoDi3smpTQRCEg43FEKxLDklJmHozoDtivq1zQSc8-8yYvPHz2dVTySqtJlCcOxQhfXm6axB8PLk9cvhcaly429y8eg1NM6cFt9SBoavVKHVXrxZ-4Jh6n_ECmN79W6YQnhwsd-nodWBnTT4wLV9xZ2xNeCIOZi4KiYOPu8"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="OnePlus logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnkpceSkA90grmRonrzyAZ8dghd2Z7vlRdOwo8EmFgSdCvAUgUSPDyfeAD4g4hshftLIN8EhctLe1YNH7uZjAIFO0LpExUSXPAISQLf0ok1yxrHL7ULbhvKQnXUzTbhDf67W5uO6dkX0GvwVRi0x24e5-PYJ-bM0ihuoQreXlbEL2aMTn2qNDvS_FWwl8pcpkyy4KOximoVVBw98uZ4lijb-Mk1-zXPXMulKaGEcqsGhcUIsdPKuXFkhN-nKBKOsBnYTSIDDQI3hw"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Google logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMmLwQSwPkIIDAH5MluozIK2f3-J4MJQ4atc_JcgewbTAhQ1ohpalC07Eg1WTEFo7B6cx6nzIUfZOOUQLVFx1UCeTtBUhvkoeNM16ivLHeGOn22qK1hn3hufB0jZ3EOjh-2x17lUMiozGqdBznP4gtLmEx0w6wsxsPcKqU9Ys7ssJiId41stBEmSj5ixLW3qL9uHKdSD-IYopHlgBgiiMdgtobaKWs7zA4_5w_SsjD8-Rosoe5Q6gx8N2Dhx1cOFvp9d8S303O2WM"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Apple logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCys4dCw3LY6x2hFQFaLbUjfByNdtiZpl2oqQ_yTlV84Nrm38JvrD6GjTf-gaN0qwXpJpSEeQ5YwjMImAABmK7M5rlEVVJ3YqdMxH9jBvd2qweuw-V8BFhsXRc8MNCwfz5e8aco7FmnInh_efr8Zgyo7LYhi-qwpzbfWuDOk5qhX1Au2cCVwAp882hLAaYsvi-NrMa8R92tK3a2T2Xa_4z2isUgQlzQsDiOWB7vtEsr3c_cOEPcgCYyf9BT_0Vn_8YRPlEPH_3Gwew"/>
-</div>
-</div>
-<div class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
-<div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
-<img alt="Realme logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtDuQaItqifGJcVhcehkRhxSNyS7SwSgmZhh6uFwbf9W5asv9mVzumTZVMNxd779FjJVmbkn06BnjUef0Wm0aePhHDwRfpNO35a5W2edd1Ae2gN8V0DRcGkd5HKjn3MP8nOt8yWm7VRyJ28yx22LrFXE0N7zDHTDUkskLtIsT3xZeTd8gPgLK5-0wVzoDiOqvkBOyLLOJdEytYFvSj3UA7wzyRfqP5WFCVrJ9z84z-UcF1G1uhKn5P-OA-Kbb8yN6Y4dsxUDb71KU"/>
-</div>
-</div>
-</div>
-<div class="flex px-4 py-8 justify-center">
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-gray-100 dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary text-base font-bold tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-surface-dark/80 transition-colors">
-<span class="truncate">View All Deals</span>
-</button>
-</div>
-</section>
-</main>
-<footer class="mt-auto border-t border-gray-200 dark:border-white/10 py-8">
-<div class="px-4 text-center text-text-light-secondary dark:text-text-dark-secondary">
-<p class="text-sm">© 2024 PriceFinder. All rights reserved.</p>
-<nav class="mt-4 flex justify-center gap-6">
-<a class="text-sm hover:text-primary" href="#">About</a>
-<a class="text-sm hover:text-primary" href="#">Contact</a>
-<a class="text-sm hover:text-primary" href="#">Terms of Service</a>
-<a class="text-sm hover:text-primary" href="#">Privacy Policy</a>
-</nav>
-</div>
-</footer>
-</div>
-</div>
-</div>
-</div>
-    {% endblock %}
-</main>
 
-</body></html>
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <main>
+
+        <div class="flex justify-center py-5">
+            <div class="w-full max-w-5xl px-4">
+
+                <header class="relative flex items-center justify-between border-b py-3">
+                    <a href="{% url 'home_page' %}" class="flex items-center gap-3 font-bold text-lg">
+                        <div class="size-6 text-primary">
+                            <svg viewBox="0 0 48 48" fill="currentColor">
+                                <path d="M24 0.7L47.2 24 24 47.3 0.7 24z" />
+                            </svg>
+                        </div>
+                        PriceFinder
+                    </a>
+
+
+                    <nav class="hidden md:flex gap-8 items-center">
+                        <a href="{% url 'wishlist' %}" class="hover:text-primary transition-colors">Wishlist</a>
+                        <a href="{% url 'shop_detail' %}" class="hover:text-primary transition-colors">Shop</a>
+                        <a href="{% url 'deal_page' %}" class="hover:text-primary transition-colors">Deals</a>
+                        <a href="{% url 'product_page' %}" class="hover:text-primary transition-colors">Product</a>
+                        <a href="{% url 'blog' %}" class="hover:text-primary transition-colors">About us</a>
+
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'profile' %}" class="text-primary font-medium hover:underline">
+                            {{ user.username }}
+                        </a>
+                        <a href="{% url 'logout' %}"
+                            class="text-red-500 hover:text-red-600 transition-colors">Logout</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="hover:text-primary transition-colors">Login</a>
+                        <a href="{% url 'singup' %}" class="hover:text-primary transition-colors">Signup</a>
+                        {% endif %}
+                    </nav>
+
+                    <button id="mobile-menu-button" class="md:hidden flex flex-col gap-1.5 p-2">
+                        <span class="w-6 h-0.5 bg-gray-800 dark:bg-gray-200 transition-all"></span>
+                        <span class="w-6 h-0.5 bg-gray-800 dark:bg-gray-200 transition-all"></span>
+                        <span class="w-6 h-0.5 bg-gray-800 dark:bg-gray-200 transition-all"></span>
+                    </button>
+
+                    <nav id="mobile-menu"
+                        class="absolute top-full left-0 w-full bg-surface-light dark:bg-surface-dark border-b md:hidden hidden z-30">
+                        <div class="flex flex-col p-4 gap-4 border-b border-gray-200 dark:border-gray-700">
+                            <a href="{% url 'shop_detail' %}" class="py-2 hover:text-primary transition-colors">Shop</a>
+                            <a href="{% url 'deal_page' %}" class="py-2 hover:text-primary transition-colors">Deals</a>
+                            <a href="{% url 'product_page' %}"
+                                class="py-2 hover:text-primary transition-colors">Product</a>
+                            <a href="{% url 'blog' %}" class="py-2 hover:text-primary transition-colors">About us</a>
+
+                            {% if user.is_authenticated %}
+                            <span class="text-primary font-medium py-2">Hi, {{ user.username }}</span>
+                            <a href="{% url 'logout' %}"
+                                class="text-red-500 hover:text-red-600 transition-colors py-2">Logout</a>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="hover:text-primary transition-colors py-2">Login</a>
+                            <a href="{% url 'singup' %}" class="hover:text-primary transition-colors py-2">Signup</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex flex-col p-4 gap-4">
+                            <a href="{% url 'blog' %}"
+                                class="py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">About
+                                Us</a>
+                            <a href="#"
+                                class="py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Contact</a>
+                            <a href="#"
+                                class="py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Privacy
+                                Policy</a>
+                            <a href="#"
+                                class="py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Terms
+                                of Service</a>
+                            <div class="pt-2 mt-2 border-t border-gray-200 dark:border-gray-700">
+                                <p class="text-xs text-gray-500 dark:text-gray-500">© 2024 PriceFinder. All rights
+                                    reserved.</p>
+                            </div>
+                        </div>
+                    </nav>
+
+                </header>
+
+                {% block content %}
+
+                <!-- <div class="scheduler">
+  <strong>Scrape Scheduler</strong><br />
+  Status: <span id="status">Running</span>
+</div> -->
+
+                <section class="py-16 text-center">
+                    <h1 class="text-4xl md:text-6xl font-black">
+                        Find the Best Price, Instantly.
+                    </h1>
+                    <p class="mt-4 text-gray-500">
+                        Compare thousands of deals from your favorite stores.
+                    </p>
+
+                    <div class="mt-6 max-w-4xl mx-auto">
+                        <form method="GET" action="{% url 'product_page' %}" class="flex flex-col md:flex-row gap-4"
+                            id="search-form">
+
+                            <input name="q" placeholder="Search for a product..."
+                                class="flex-1 h-12 px-4 rounded-xl border" autocomplete="off" />
+
+                            <div class="flex flex-col">
+                                <input name="price" type="number" id="price-input" placeholder="Max Price (TK)"
+                                    class="h-12 px-4 rounded-xl border md:w-60" min="0" max="200000" />
+                                <div id="price-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+
+                            <button class="h-12 px-8 bg-primary text-white rounded-xl font-bold">
+                                Search
+                            </button>
+                        </form>
+                        <div id="suggestions" class="suggestion-box"></div>
+                    </div>
+                </section>
+
+                <section class="py-12">
+                    <h2
+                        class="text-2xl sm:text-3xl font-bold tracking-tight text-text-light-primary dark:text-text-dark-primary px-4 pb-6">
+                        Today's Top Deals</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Vivo logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIXiotBnnI4kNtgnpgJzYK6okYJ8zfz_2PcwH0luOKU4_gecB-OUKRPwvbjzPaGSjN3-dUBiVD_zfpX2F65mKA2wDIEhVpCz6UnUThnyOoNDVaWE6O9RHmO8pLOeFET30Bl9PY3LFxvrytU5H_k2dn0FeE9R-2ZZdrny5HWsG-hNZ9QWzT9cjFlv_YYGNtQw-LNZRubw1umEc8Wl7VBGSX6rjZzRq0-OfwRIFgjljZt77S_CH9Igj4G9WEOi-ChTPPwFaoOuaJyzk" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Samsung logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-qUmvz7k-i__dmO5GqoXOZOIT_gtIlDSpEf__YgFgG4m00UnDfp3kDFmBPOI7Ig7XJsOQ-6ez2OezzOawkkfDmhw8oarR2kd9Q-EHwAAp8UYBL8ovLJfvrvb7HB2bpZ0FLB0TczlkG89ZDVKhFh3_UBtCrX9SkNTt3HOpdJHTptOxjM-UPkgVH40Qjj1Q9HFzMF1ASsKZoN3gdEVPj9J_JqU9nS6iKRcSR4OX6HPVcd9tMuWIMfTKgKf5HulsFeTl_dPP1rGnZSQ" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Xiaomi logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHbGZZhInb_T2IVPyPYhgFxoxXokmMO6PUquJ5F2y1F9d32cjVDlhgaG7Ds6ktSypqTbBBOg6Ci7gvpBg-ime32tdVlm8bDqUeugAEKWgHfpDxBrLFnGQ51oUa8YQf4wkStlX3NOi4aUo2J5m0G59XaJ4S3tKWdfHVoWnwTjjDLG37I_dG7mJQerWzQzrkc-bVMeaxV47Tu9rBkqVh8_Xz1--iNuSQyGPQU7u-KAcVo4kxgk_ToyM7v-qZmYt0xsJCuuqa9N2YmJY" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Oppo logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNi6B6TdFxsPZn2zUSrMyjfNVev_zZomKio-DDuCr4UdbThJJ3aDVADbmyM5DRZ1vc0XBlWh75paawDeippjfai78gK1jyb6gbKIKaeoDi3smpTQRCEg43FEKxLDklJmHozoDtivq1zQSc8-8yYvPHz2dVTySqtJlCcOxQhfXm6axB8PLk9cvhcaly429y8eg1NM6cFt9SBoavVKHVXrxZ-4Jh6n_ECmN79W6YQnhwsd-nodWBnTT4wLV9xZ2xNeCIOZi4KiYOPu8" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="OnePlus logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnkpceSkA90grmRonrzyAZ8dghd2Z7vlRdOwo8EmFgSdCvAUgUSPDyfeAD4g4hshftLIN8EhctLe1YNH7uZjAIFO0LpExUSXPAISQLf0ok1yxrHL7ULbhvKQnXUzTbhDf67W5uO6dkX0GvwVRi0x24e5-PYJ-bM0ihuoQreXlbEL2aMTn2qNDvS_FWwl8pcpkyy4KOximoVVBw98uZ4lijb-Mk1-zXPXMulKaGEcqsGhcUIsdPKuXFkhN-nKBKOsBnYTSIDDQI3hw" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Google logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMmLwQSwPkIIDAH5MluozIK2f3-J4MJQ4atc_JcgewbTAhQ1ohpalC07Eg1WTEFo7B6cx6nzIUfZOOUQLVFx1UCeTtBUhvkoeNM16ivLHeGOn22qK1hn3hufB0jZ3EOjh-2x17lUMiozGqdBznP4gtLmEx0w6wsxsPcKqU9Ys7ssJiId41stBEmSj5ixLW3qL9uHKdSD-IYopHlgBgiiMdgtobaKWs7zA4_5w_SsjD8-Rosoe5Q6gx8N2Dhx1cOFvp9d8S303O2WM" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Apple logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCys4dCw3LY6x2hFQFaLbUjfByNdtiZpl2oqQ_yTlV84Nrm38JvrD6GjTf-gaN0qwXpJpSEeQ5YwjMImAABmK7M5rlEVVJ3YqdMxH9jBvd2qweuw-V8BFhsXRc8MNCwfz5e8aco7FmnInh_efr8Zgyo7LYhi-qwpzbfWuDOk5qhX1Au2cCVwAp882hLAaYsvi-NrMa8R92tK3a2T2Xa_4z2isUgQlzQsDiOWB7vtEsr3c_cOEPcgCYyf9BT_0Vn_8YRPlEPH_3Gwew" />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-3 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-surface-dark shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-full aspect-square flex items-center justify-center p-8 bg-white rounded-xl">
+                                <img alt="Realme logo" class="w-full h-full object-contain"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtDuQaItqifGJcVhcehkRhxSNyS7SwSgmZhh6uFwbf9W5asv9mVzumTZVMNxd779FjJVmbkn06BnjUef0Wm0aePhHDwRfpNO35a5W2edd1Ae2gN8V0DRcGkd5HKjn3MP8nOt8yWm7VRyJ28yx22LrFXE0N7zDHTDUkskLtIsT3xZeTd8gPgLK5-0wVzoDiOqvkBOyLLOJdEytYFvSj3UA7wzyRfqP5WFCVrJ9z84z-UcF1G1uhKn5P-OA-Kbb8yN6Y4dsxUDb71KU" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex px-4 py-8 justify-center">
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-gray-100 dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary text-base font-bold tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-surface-dark/80 transition-colors">
+                            <span class="truncate">View All Deals</span>
+                        </button>
+                    </div>
+                </section>
+
+                {% endblock %}
+
+                <footer class="mt-auto border-t border-gray-200 dark:border-white/10 pt-12 pb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-4 md:px-10">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center gap-2 text-text-light-primary dark:text-text-dark-primary">
+                                <div class="size-6 text-primary">
+                                    <svg class="w-full h-full" fill="none" viewBox="0 0 48 48"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_footer)">
+                                            <path clip-rule="evenodd"
+                                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                                                fill="currentColor" fill-rule="evenodd"></path>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_footer">
+                                                <rect fill="white" height="48" width="48"></rect>
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <span class="text-lg font-bold tracking-tight">PriceFinder</span>
+                            </div>
+                            <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+                                Compare prices and save money on your favorite products instantly.
+                            </p>
+                            <div class="flex gap-4">
+                                <a class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="sr-only">Facebook</span>
+                                    <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path clip-rule="evenodd"
+                                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                            fill-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                                <a class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="sr-only">Twitter</span>
+                                    <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="sr-only">Instagram</span>
+                                    <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path clip-rule="evenodd"
+                                            d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.468 3.37c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                            fill-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <h3
+                                class="text-sm font-semibold uppercase tracking-wider text-text-light-primary dark:text-text-dark-primary">
+                                Explore</h3>
+                            <nav class="flex flex-col gap-3">
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="{% url 'blog' %}">About Us</a>
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="{% url 'deal_page' %}">Deals</a>
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">Blog</a>
+                            </nav>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <h3
+                                class="text-sm font-semibold uppercase tracking-wider text-text-light-primary dark:text-text-dark-primary">
+                                Support</h3>
+                            <nav class="flex flex-col gap-3">
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">Contact Us</a>
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">Privacy Policy</a>
+                                <a class="text-sm text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-primary transition-colors"
+                                    href="#">Terms of Service</a>
+                            </nav>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <h3
+                                class="text-sm font-semibold uppercase tracking-wider text-text-light-primary dark:text-text-dark-primary">
+                                Subscribe</h3>
+                            <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                                Get the latest deals and updates sent to your inbox.
+                            </p>
+                            <form class="flex flex-col gap-2">
+                                <input type="email" placeholder="Enter your email"
+                                    class="form-input h-10 w-full rounded-lg border border-gray-200 bg-transparent px-3 text-sm placeholder:text-text-light-secondary focus:border-primary focus:ring-primary dark:border-white/10 dark:text-text-dark-primary" />
+                                <button type="button"
+                                    class="h-10 w-full rounded-lg bg-primary px-4 text-sm font-bold text-white hover:bg-primary/90 transition-colors">
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 dark:border-white/10 pt-8 flex justify-center">
+                        <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary text-center">© 2024
+                            PriceFinder. All rights reserved.</p>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
