@@ -215,8 +215,8 @@ Navbar removed - using global navbar from base.html
     <h2 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-6 flex items-center gap-3">
         <span class="material-symbols-outlined text-primary text-3xl">compare_arrows</span>
         Price Comparison Across All Stores
-        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">{{ deals|length }} Store{{
-            deals|length|pluralize }}</span>
+        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">{{ deals|length }}
+            Store</span>
     </h2>
 
     <div
@@ -363,11 +363,17 @@ Navbar removed - using global navbar from base.html
 
                     <!-- Action -->
                     <td class="p-4 text-right">
-                        <a href="{% url 'shop_detail' %}"
+                        <!-- <a href="{% url 'shop_detail' %}"
+                            class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-600 transition">
+                            View
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a> -->
+                        <a href="{% url 'shop_detail' %}?shop={{ deal.shop|slugify }}"
                             class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-600 transition">
                             View
                             <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </a>
+
                     </td>
                 </tr>
                 {% empty %}

@@ -33,8 +33,11 @@ def shop_list(request):
     # Fetch all shops
     shops = Shop.objects.prefetch_related('outlets').all()
 
+    selected_shop = request.GET.get('shop')
+
     context = {
         "shops": shops,
+        "selected_shop": selected_shop,
     }
 
     return render(request, "blog/Shop.html", context)
