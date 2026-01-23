@@ -198,6 +198,11 @@ Navbar removed - using global navbar from base.html
                 </div>
             </div>
 
+            <a href="{% url 'ssl_payment' product.id %}"
+                class="inline-flex items-center gap-2 bg-primary text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-600 transition shadow-lg">
+                <span class="material-symbols-outlined">payments</span>
+                Buy Now (Secure Payment)
+            </a>
             <div class="mt-4 md:mt-0 md:ml-auto">
                 <a href="{{ best_deal.link }}" target="_blank"
                     class="inline-flex items-center gap-2 bg-primary text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/40 hover:shadow-xl">

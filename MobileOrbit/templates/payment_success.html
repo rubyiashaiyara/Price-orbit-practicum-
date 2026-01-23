@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="min-h-[75vh] flex items-center justify-center px-4">
+    <div class="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-10 text-center">
+
+        <!-- Icon -->
+        <div class="flex justify-center mb-6">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined text-green-600 text-5xl">
+                    check_circle
+                </span>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl font-black text-slate-900 dark:text-white mb-3">
+            Payment Completed
+        </h1>
+
+        <p class="text-slate-600 dark:text-slate-300 mb-6">
+            Your payment has been processed successfully.
+        </p>
+
+        <!-- Payment Details -->
+        <div class="bg-slate-100 dark:bg-slate-700 rounded-xl p-4 text-sm text-left mb-6">
+            <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+            <p><strong>Amount:</strong> ৳{{ payment.amount }}</p>
+            <p><strong>Status:</strong>
+                <span class="text-green-600 font-bold">{{ payment.status }}</span>
+            </p>
+            <p><strong>Product:</strong> {{ payment.product.name }}</p>
+        </div>
+
+        <!-- Redirect Info -->
+        <p class="text-sm text-slate-500 mb-4">
+            Redirecting you to your dashboard...
+        </p>
+
+        <!-- Manual Redirect -->
+        <a href="/user/profile/"
+           class="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-600 transition">
+            Go to Dashboard
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = "/user/profile/";
+    }, 5000);
+</script>
+{% endblock %}

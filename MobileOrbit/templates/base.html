@@ -58,10 +58,10 @@
 
     <script>
         const API_ENDPOINT = "/scrape/run/";
-        // const INTERVAL_HOURS = 24;
+        // const INTERVAL_HOURS = 24;  //////if run after 1 hour
 
         //const INTERVAL_MS = 6000;
-        const INTERVAL_MS = INTERVAL_HOURS * 60 * 60 * 1000;
+        //const INTERVAL_MS = 1 * 1000;  //////////////run after 1 munit 
         const STORAGE_KEY = "lastScrapeRun";
 
         async function callScrapeAPI() {
@@ -74,9 +74,9 @@
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
                 localStorage.setItem(STORAGE_KEY, Date.now());
-                console.log("✅ Scrape executed at", new Date().toISOString());
+                console.log("Scrape executed at", new Date().toISOString());
             } catch (err) {
-                console.error("❌ Scrape API error:", err.message);
+                console.error(" Scrape API error:", err.message);
             }
         }
 
@@ -99,7 +99,7 @@
                 if (document.visibilityState === "visible" && isExecutionDue()) {
                     callScrapeAPI();
                 }
-            }, 5 * 60 * 1000);
+            }, 1 * 1000);  ///////////for cheak after how  many time it will scrape
         }
 
         document.addEventListener("DOMContentLoaded", startScheduler);
@@ -305,9 +305,11 @@
                 {% block content %}
 
                 <!-- <div class="scheduler">
-  <strong>Scrape Scheduler</strong><br />
-  Status: <span id="status">Running</span>
-</div> -->
+                    <strong>Scrape Scheduler</strong><br />
+                    Status: <span id="status">Running</span>
+                </div>     -->
+
+                <!-- ////////to load dynamically -->
 
                 <section class="py-16 text-center">
                     <h1 class="text-4xl md:text-6xl font-black">

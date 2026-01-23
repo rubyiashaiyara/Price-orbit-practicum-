@@ -5,8 +5,171 @@ from django.db.models import Q
 from .models import Wishlist
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, ProductListing, Wishlist, Shop, Product, ProductListing
+from .models import Product, ProductListing, Wishlist, Shop, Product, ProductListing, Payment
+import uuid  #unic identifier
+from django.contrib import messages
+import requests
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest
 
+@login_required
+# def sslcommerz_payment(request, product_id):
+#     # 1️⃣ Get product safely
+#     product = get_object_or_404(Product, id=product_id)
+
+#     # 2️⃣ Create payment record (pending)
+#     payment = Payment.objects.create(
+#         user=request.user,
+#         product=product,
+#         transaction_id=f"TXN{product.id}{request.user.id}",
+#         amount=product.discount_price if product.discount_price > 0 else product.regular_price,
+#         status="Pending",
+#     )
+
+#     # 3️⃣ Prepare SSLCommerz payload its a stracture to create oboject of ssl commerce api
+#     payload = {
+#         "store_id": settings.SSLCOMMERZ_STORE_ID,
+#         "store_passwd": settings.SSLCOMMERZ_STORE_PASSWORD,
+#         "total_amount": payment.amount,
+#         "currency": "BDT",
+#         "tran_id": payment.transaction_id,
+#         "success_url": request.build_absolute_uri("/payment/success/"),
+#         "fail_url": request.build_absolute_uri("/payment/fail/"),
+#         "cancel_url": request.build_absolute_uri("/payment/cancel/"),
+#         "cus_name": request.user.get_full_name() or request.user.username,
+#         "cus_email": request.user.email or "test@example.com",
+#         "cus_add1": "Dhaka",
+#         "cus_city": "Dhaka",
+#         "cus_country": "Bangladesh",
+#         "cus_phone": "01748196522",
+#         "shipping_method": "NO",
+#         "product_name": product.name,
+#         "product_category": "Mobile",
+#         "product_profile": "general",
+#     }
+
+#     # 4️⃣ Call SSLCommerz API
+#     response = requests.post(
+#         settings.SSLCOMMERZ_INIT_URL,
+#         data=payload
+#     )
+
+#     data = response.json()
+
+#     # 5️⃣ Redirect to payment gateway
+#     if data.get("status") == "SUCCESS":
+#         return HttpResponseRedirect(data["GatewayPageURL"])
+
+#     # 6️⃣ Fallback if gateway fails
+#     payment.status = "Failed"
+#     payment.save()
+#     return HttpResponseRedirect("/")
+
+@login_required
+def sslcommerz_payment(request, product_id):
+    #  Get product safely
+    product = get_object_or_404(Product, id=product_id)
+
+    # Create unique transaction ID
+    transaction_id =str(uuid.uuid4())
+
+    # Create payment record (Pending)
+    payment = Payment.objects.create(
+        user=request.user,
+        product=product,
+        transaction_id=transaction_id,
+        amount=product.discount_price if product.discount_price > 0 else product.regular_price,
+        status="Pending",
+    )
+
+    #  Prepare SSLCommerz payload
+    payload = {
+        "store_id": settings.SSLCOMMERZ_STORE_ID,
+        "store_passwd": settings.SSLCOMMERZ_STORE_PASSWORD,
+        "total_amount": payment.amount,
+        "currency": "BDT",
+        "tran_id": payment.transaction_id,
+        "success_url": request.build_absolute_uri("/payment/success/"),
+        "fail_url": request.build_absolute_uri("/payment/fail/"),
+        "cancel_url": request.build_absolute_uri("/payment/cancel/"),
+        "cus_name": request.user.get_full_name() or request.user.username,
+        "cus_email": request.user.email or "test@example.com",
+        "cus_phone": "01748196522",
+        "cus_add1": "Dhaka",
+        "cus_city": "Dhaka",
+        "cus_country": "Bangladesh",
+        "shipping_method": "NO",
+        "product_name": product.name,
+        "product_category": "Mobile",
+        "product_profile": "general",
+    }
+
+    #  Call SSLCommerz API
+    response = requests.post(settings.SSLCOMMERZ_INIT_URL, data=payload)
+    data = response.json()
+
+    # If gateway created successfully → show processing page
+    if data.get("status") == "SUCCESS":
+        return render(
+            request,
+            "processing.html",
+            {
+                "transaction_id": payment.transaction_id,
+                "amount": payment.amount,
+                "gateway_url": data["GatewayPageURL"],
+            }
+        )
+
+    # If gateway fails
+    payment.status = "Failed"
+    payment.save()
+    return HttpResponseRedirect("/")
+
+@csrf_exempt #post api for success
+def payment_success(request):
+    if request.method != "POST":
+        return HttpResponseBadRequest("Invalid request method")
+
+    tran_id = request.POST.get("tran_id")
+
+    if not tran_id:
+        return HttpResponseBadRequest("Transaction ID not found")
+
+    try:
+        payment = Payment.objects.get(transaction_id=tran_id)
+    except Payment.DoesNotExist:
+        return HttpResponseBadRequest("Payment record does not exist")
+
+    # Update payment status safely
+    payment.status = "Success"
+    payment.save(update_fields=["status"])
+
+    return render(request, "payment_success.html", {
+        "payment": payment
+    })
+
+
+# def payment_success(request):
+#     tran_id = request.POST.get("tran_id")
+#     payment = Payment.objects.get(transaction_id=tran_id)  #get transection id from database
+#     payment.status = "Success" #status cheance
+#     payment.save()
+    # return redirect("download_invoice", tran_id=tran_id)
+
+@csrf_exempt
+def payment_fail(request):
+    tran_id = request.POST.get("tran_id") 
+    Payment.objects.filter(transaction_id=tran_id).update(status="Failed")
+    return HttpResponse("Payment Failed")
+
+@csrf_exempt
+def payment_cancel(request):
+    return HttpResponse("Payment Cancelled")
 
 @login_required
 def add_to_wishlist(request, product_id):
@@ -55,6 +218,28 @@ def product_autocomplete(request):
         titles = list(qs.values_list('name', flat=True)[:8])
         return JsonResponse(titles, safe=False)
     return JsonResponse([], safe=False)
+
+@login_required
+def download_invoice(request, tran_id):
+    payment = get_object_or_404(Payment, transaction_id=tran_id, user=request.user)
+
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="invoice_{tran_id}.pdf"'
+
+    doc = SimpleDocTemplate(response)
+    styles = getSampleStyleSheet()
+
+    content = [
+        Paragraph("<b>PriceFinder Invoice</b>", styles["Title"]),
+        Paragraph(f"Username: {payment.user}", styles["Normal"]),
+        Paragraph(f"Transaction ID: {payment.transaction_id}", styles["Normal"]),
+        Paragraph(f"Product: {payment.product.name}", styles["Normal"]),
+        Paragraph(f"Amount Paid: ৳{payment.amount}", styles["Normal"]),
+        Paragraph(f"Status: {payment.status}", styles["Normal"]),
+    ]
+
+    doc.build(content)
+    return response
 
 def product_page(request):
     """
@@ -124,6 +309,8 @@ def deal_page(request, product_id):
         'listings': listings, # This is what populates the table
     }
     return render(request, 'Deal.html', context)
+
+
 # def deal_page(request, product_id):
 #     product = get_object_or_404(Product, id=product_id)
 
@@ -200,9 +387,7 @@ def home_search_view(request):
 #             context['listings'] = listings
 #             if listings.exists():
 #                 context['best_deal'] = listings.first()
-
 #     return render(request, 'deal.html', context)
-
 
 @login_required
 def deal_search_view(request):
@@ -218,8 +403,8 @@ def deal_search_view(request):
     if not query:
         return render(request, 'Deal.html', context)
 
-    # 🔍 Find all similar products
-    products = Product.objects.filter(name__icontains=query)
+    # Find all similar products
+    products = Product.objects.filter(name__icontains=query) #---------filter for name
 
     if not products.exists():
         return render(request, 'Deal.html', context)

@@ -9,11 +9,11 @@
         <div class="bg-white border rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6">
             <div class="h-28 w-28 rounded-full border overflow-hidden">
                 {% if user_obj.image %}
-                    <img src="{{ user_obj.image.url }}" class="w-full h-full object-cover">
+                <img src="{{ user_obj.image.url }}" class="w-full h-full object-cover">
                 {% else %}
-                    <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
-                        <span class="material-symbols-outlined text-4xl">person</span>
-                    </div>
+                <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                    <span class="material-symbols-outlined text-4xl">person</span>
+                </div>
                 {% endif %}
             </div>
 
@@ -63,10 +63,78 @@
             </div>
         </div>
 
+        <!-- Payment History -->
+        <div class="bg-white border rounded-xl p-6">
+            <h2 class="text-lg font-bold mb-4">Payment History</h2>
+
+            {% if payments %}
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b bg-gray-50">
+                            <th class="py-3 px-2 text-left">Product</th>
+                            <th class="py-3 px-2 text-center">Amount</th>
+                            <th class="py-3 px-2 text-center">Status</th>
+                            <!-- <th class="py-3 px-2 text-center">Date</th> -->
+                            <th class="py-3 px-2 text-center">Invoice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-2 font-medium">
+                                {{ payment.product.name }}
+                            </td>
+
+                            <td class="py-3 px-2 text-center">
+                                ৳{{ payment.amount }}
+                            </td>
+
+                            <td class="py-3 px-2 text-center">
+                                {% if payment.status == "Success" %}
+                                <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700">
+                                    Success
+                                </span>
+                                {% elif payment.status == "Pending" %}
+                                <span class="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
+                                    Pending
+                                </span>
+                                {% else %}
+                                <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700">
+                                    Failed
+                                </span>
+                                {% endif %}
+                            </td>
+
+                            <!-- <td class="py-3 px-2 text-center">
+                                {{ payment.created_at|date:"d M Y" }}
+                            </td> -->
+
+                            <td class="py-3 px-2 text-center">
+                                {% if payment.status == "Success" %}
+                                <a href="{% url 'download_invoice' payment.transaction_id %}" class="text-blue-600 font-semibold hover:underline">
+                                    
+                                    Download
+                                </a>
+                                {% else %}
+                                —
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-gray-500 text-sm">No payment history found.</p>
+            {% endif %}
+        </div>
+
         <!-- Quick Actions -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        
-            <a href="{% url 'logout' %}" class="p-4 border rounded-xl hover:bg-red-50 text-center font-semibold text-red-500">
+
+            <a href="{% url 'logout' %}"
+                class="p-4 border rounded-xl hover:bg-red-50 text-center font-semibold text-red-500">
                 🚪 Logout
             </a>
         </div>

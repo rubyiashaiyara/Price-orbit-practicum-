@@ -1,6 +1,26 @@
 from django.db import models
 from django.conf import settings # Use settings to reference the User model
 
+class Payment(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        "Product",  # string reference fixes NameError
+        on_delete=models.CASCADE,
+        related_name="payments"
+    )
+
+    transaction_id = models.CharField(max_length=100, unique=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20)  # Pending / Success / Failed
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.transaction_id} - {self.status}"
+
 # -------------------------
 # Simple Wishlist Model
 # (Allows duplicate products per user)
@@ -138,4 +158,5 @@ class ProductListing(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.shop.shop_name}"
+    
     

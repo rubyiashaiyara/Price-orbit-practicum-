@@ -20,4 +20,9 @@ urlpatterns = [
     path("shop/", views.shop_list, name="shop_detail"),
     path('wishlist/add/<int:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
     path('wishlist/', views.wishlist_page, name='wishlist'),
+    path("pay/<int:product_id>/", views.sslcommerz_payment, name="ssl_payment"),
+    path("payment/success/", views.payment_success, name="payment_success"),
+    path("payment/fail/", views.payment_fail),
+    path("payment/cancel/", views.payment_cancel),
+    path("invoice/<str:tran_id>/", views.download_invoice, name="download_invoice"),
 ]
