@@ -1,0 +1,2 @@
+mvenv\scripts\activate
+(mvenv) PS E:\Prac-ticum\mobile\app\MobileOrbit> python manage.py runserver
